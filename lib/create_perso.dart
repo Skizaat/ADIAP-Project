@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() => runApp(const MyApp());
 
@@ -7,7 +8,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const appTitle = 'Adiap - Informations personnelles';
+    const appTitle = 'Form Validation';
 
     return MaterialApp(
       title: appTitle,
@@ -20,6 +21,10 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+enum DiabTreatment { insu_pump, multi_inj }
+
 // Create a Form widget.
 class MyCustomForm extends StatefulWidget {
   const MyCustomForm({Key? key}) : super(key: key);
@@ -30,6 +35,8 @@ class MyCustomForm extends StatefulWidget {
   }
 }
 
+
+
 // Create a corresponding State class.
 // This class holds data related to the form.
 class MyCustomFormState extends State<MyCustomForm> {
@@ -39,8 +46,9 @@ class MyCustomFormState extends State<MyCustomForm> {
   // Note: This is a GlobalKey<FormState>,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
-
+  DiabTreatment _trt = DiabTreatment.multi_inj;
   @override
+
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
     return Form(
@@ -48,33 +56,58 @@ class MyCustomFormState extends State<MyCustomForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Prénom:',
-          ),
           TextFormField(
+            decoration: new InputDecoration(labelText: "Prénom"),
             // The validator receives the text that the user has entered.
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Entrez votre prénom';
               }
               return null;
             },
           ),
-          const Text(
-            'Poids en kg:',
-          ),
           TextFormField(
-            // The validator receives the text that the user has entered.
+            decoration: new InputDecoration(labelText: "Poids"),
+            keyboardType: TextInputType.number,
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.digitsOnly
+            ], // Only numbers can be entered
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Entrez votre poids';
               }
-              /*else if (value!=int) {
-                return 'entrez un chiffre';
-              }*/
               return null;
             },
           ),
+          ListTile(
+            title: const Text('Pompe à insuline'),
+            leading: Radio(
+              value: DiabTreatment.insu_pump,
+              groupValue: _trt,
+              onChanged:(val){
+                setState(() {
+                  _trt=DiabTreatment.insu_pump;
+                });
+              },
+              activeColor: Colors.green,
+              toggleable: true,
+            ),
+          ),
+          ListTile(
+            title: const Text('Multi injection d insulines'),
+            leading: Radio(
+              value: DiabTreatment.multi_inj,
+              groupValue: _trt,
+              onChanged: (val) {
+                setState(() {
+                  _trt = DiabTreatment.multi_inj;
+                });
+              },
+              activeColor: Colors.green,
+              toggleable: true,
+            ),
+          ),
+
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
