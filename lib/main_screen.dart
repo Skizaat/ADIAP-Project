@@ -48,7 +48,7 @@ class MainScaffold extends StatelessWidget {
                     ),
                     Row(
                       children: const [
-                        Icon(Icons.help_outline),
+                        Icon(Icons.info),
                         Text("En savoir plus"),
                       ],
                     ),
