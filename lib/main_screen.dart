@@ -15,13 +15,11 @@ class MainScaffold extends StatelessWidget {
           titleSpacing: 0.0,
           // if you want remove title spacing with back button
           title: const Text('Nom Profil'),
-          leading: Material( //Custom leading icon, such as back icon or other icon
-              color: Colors.transparent,
-                child: Container(
-                  padding: const EdgeInsets.fromLTRB(12.0, 16.0, 16.0, 16.0),
-                ),
-              )
+          leading: IconButton( //Custom leading icon, such as back icon or other icon
+              onPressed: () {},
+              icon: const Icon(Icons.menu),
           )
+      ),
     );
   }
 }
