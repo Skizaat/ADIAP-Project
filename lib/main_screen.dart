@@ -1,24 +1,75 @@
 import 'package:flutter/material.dart';
-import 'welcome_screen.dart';
+import 'package:flutter/widgets.dart';
+
 
 class MainScaffold extends StatelessWidget {
-  const MainScaffold({Key? key}) : super(key: key);
+  MainScaffold({Key? key}) : super(key: key);
+  final GlobalKey<ScaffoldState> _drawerscaffoldkey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //backgroundColor: Colors.blue,
-        //automaticallyImplyLeading: true
-          elevation: 0.0,
-          // for elevation
-          titleSpacing: 0.0,
-          // if you want remove title spacing with back button
           title: const Text('Nom Profil'),
           leading: IconButton( //Custom leading icon, such as back icon or other icon
-              onPressed: () {},
+              onPressed: () {
+                if(_drawerscaffoldkey.currentState!.isDrawerOpen) {
+                  Navigator.pop(context);
+                } else {
+                  _drawerscaffoldkey.currentState!.openDrawer();
+                }
+              },
               icon: const Icon(Icons.menu),
           )
+      ),
+
+
+      body: Scaffold(
+        key: _drawerscaffoldkey,
+        drawer: Drawer(
+          child: SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+              ),
+              child: IntrinsicHeight(
+                child: Column(
+                  children: <Widget> [
+                    Row(
+                      children: const [
+                        Icon(Icons.account_circle),
+                        Text("Mon Profil")
+                      ],
+                    ),
+                    Row(
+                      children: const [
+                        Icon(Icons.emoji_events),
+                        Text("Mes Activités")
+                      ],
+                    ),
+                    Row(
+                      children: const [
+                        Icon(Icons.help_outline),
+                        Text("En savoir plus"),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Icon(Icons.settings),
+                        Text("Paramètres"),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              /*child: Container(
+              color: Colors.white60,
+              height: MediaQuery.of(context).size.height
+              ),*/
+
+            ),
+          )
+
+        ),
       ),
     );
   }
