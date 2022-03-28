@@ -1,5 +1,5 @@
-import 'package:adiap/main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:adiap/routes.dart';
 
 class WelcomeScaffold extends StatelessWidget {
   const WelcomeScaffold({Key? key}) : super(key: key);

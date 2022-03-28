@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:adiap/welcome_screen.dart';
+import 'package:adiap/main_screen.dart';
 
 class WelcomeRoute extends StatelessWidget {
   const WelcomeRoute({Key? key}) : super(key: key);
@@ -15,6 +16,6 @@ class MainRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const WelcomeScaffold();
+    return const MainScaffold();
   }
 }
