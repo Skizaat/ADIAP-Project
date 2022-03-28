@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import "package:shared_preferences/shared_preferences.dart";
 
 void main() => runApp(const MyApp());
 
@@ -51,13 +52,16 @@ class MyCustomFormState extends State<MyCustomForm> {
 
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
+    String? name;
+    int? weight;
     return Form(
       key: _formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextFormField(
-            decoration: new InputDecoration(labelText: "Prénom"),
+            decoration: const InputDecoration(labelText: "Prénom"),
+            onSaved: (value){name=value;},
             // The validator receives the text that the user has entered.
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -67,7 +71,8 @@ class MyCustomFormState extends State<MyCustomForm> {
             },
           ),
           TextFormField(
-            decoration: new InputDecoration(labelText: "Poids"),
+            onSaved: (value){weight=value as int;},
+            decoration: const InputDecoration(labelText: "Poids"),
             keyboardType: TextInputType.number,
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.digitsOnly
@@ -119,13 +124,55 @@ class MyCustomFormState extends State<MyCustomForm> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Processing Data')),
                   );
+                  _save();
+                  _read();
                 }
               },
               child: const Text('Submit'),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              child: const Text('Read'),
+              onPressed: () {
+                _read();
+              },
+            ),
+          ),
         ],
       ),
     );
+  }
+  _read() async {
+    final prefs = await SharedPreferences.getInstance();
+    const key = 'weight';
+    final value = prefs.getString(key);
+    print('read: $value');
+    if(value != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('read : $value')),
+      );
+    }
+  }
+
+  _save() async {
+    final prefs = await SharedPreferences.getInstance();
+    const key = 'treatment';
+    final value = _trt;
+    String val;
+    if(value == DiabTreatment.multi_inj){
+      val="Multi injection";
+    }
+    else{
+      val="Pompe à insuline";
+    }
+    prefs.setString(key, val);
+    print('saved $val');
+    if(value != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('saved : $val')),
+      );
+    }
   }
 }
