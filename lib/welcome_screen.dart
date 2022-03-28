@@ -1,8 +1,8 @@
 import 'package:adiap/main_screen.dart';
 import 'package:flutter/material.dart';
 
-class MyScaffold extends StatelessWidget {
-  const MyScaffold({Key? key}) : super(key: key);
+class WelcomeScaffold extends StatelessWidget {
+  const WelcomeScaffold({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,25 +23,9 @@ class MyScaffold extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const MainRoute()));
               }
           ),
-          /*Container(
-              height: 60,
-              width: 250,
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              decoration: BoxDecoration(color: Colors.blue[500]),
-              alignment: Alignment.center,
-              child: Text('Créer mon profil')
-          ) */
         ],
       ),
     );
   }
 }
 
-class WelcomeRoute extends StatelessWidget {
-  const WelcomeRoute({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const MyScaffold();
-  }
-}
