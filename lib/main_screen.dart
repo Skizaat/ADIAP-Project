@@ -35,36 +35,52 @@ class MainScaffold extends StatelessWidget {
               child: IntrinsicHeight(
                 child: Column(
                   children: <Widget> [
-                    Row(
-                      children: const [
-                        Icon(Icons.account_circle),
-                        Text("Mon Profil")
-                      ],
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileRoute()));
+                      },
+                      child: Row(
+                          children: const [
+                            Icon(Icons.account_circle),
+                            Text("Mon Profil")
+                          ],
+                      ),
                     ),
+
                     GestureDetector(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityRoute()));
                       },
-                      child: Container(
-                        child: Row(
-                          children: const [
-                            Icon(Icons.emoji_events),
-                            Text("Mes Activités")
-                          ],
-                        ),
+                      child: Row(
+                        children: const [
+                          Icon(Icons.emoji_events),
+                          Text("Mes Activités")
+                        ],
                       ),
                     ),
-                    Row(
-                      children: const [
-                        Icon(Icons.info),
-                        Text("En savoir plus"),
-                      ],
+
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const KnowledgeRoute()));
+                      },
+                      child: Row(
+                        children: const [
+                          Icon(Icons.info),
+                          Text("En savoir plus"),
+                        ],
+                      ),
                     ),
-                    Row(
-                      children: const [
-                        Icon(Icons.settings),
-                        Text("Paramètres"),
-                      ],
+
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ParameterRoute()));
+                      },
+                      child: Row(
+                        children: const [
+                          Icon(Icons.settings),
+                          Text("Paramètres"),
+                        ],
+                      ),
                     ),
                   ],
                 ),

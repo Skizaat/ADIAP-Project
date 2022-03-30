@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ActivityScaffold extends StatelessWidget {
-  const ActivityScaffold({Key? key}) : super(key: key);
+class KnowledgeScaffold extends StatelessWidget {
+  const KnowledgeScaffold({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
