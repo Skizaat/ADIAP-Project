@@ -41,11 +41,18 @@ class MainScaffold extends StatelessWidget {
                         Text("Mon Profil")
                       ],
                     ),
-                    Row(
-                      children: const [
-                        Icon(Icons.emoji_events),
-                        Text("Mes Activités")
-                      ],
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityRoute()));
+                      },
+                      child: Container(
+                        child: Row(
+                          children: const [
+                            Icon(Icons.emoji_events),
+                            Text("Mes Activités")
+                          ],
+                        ),
+                      ),
                     ),
                     Row(
                       children: const [

@@ -9,7 +9,7 @@ class ActivityScaffold extends StatelessWidget {
     // of paper on which the UI appears.
     return const Material(
       child: Center(
-        child: Text("Activités"),
+        child: Text("En savoir plus"),
       ),
     );
   }
