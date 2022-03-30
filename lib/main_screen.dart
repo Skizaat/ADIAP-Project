@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:adiap/routes.dart';
 
 
 class MainScaffold extends StatelessWidget {
@@ -53,7 +54,7 @@ class MainScaffold extends StatelessWidget {
                       ],
                     ),
                     Row(
-                      children: [
+                      children: const [
                         Icon(Icons.settings),
                         Text("Paramètres"),
                       ],
@@ -61,15 +62,31 @@ class MainScaffold extends StatelessWidget {
                   ],
                 ),
               ),
-              /*child: Container(
-              color: Colors.white60,
-              height: MediaQuery.of(context).size.height
-              ),*/
-
             ),
           )
 
         ),
+        body: Column(
+          children: [
+            const Expanded(
+                child: Center(
+                  child: Text("Mes Activités à venir")
+                )
+            ),
+            const Expanded(
+                child: Center(
+                  child: Text("Pas d'activités à venir pour l'instant"),
+                )
+            ),
+            ElevatedButton(
+                child: const Text("Créez une activité"),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityRoute()));
+                },
+
+            )
+          ],
+        )
       ),
     );
   }

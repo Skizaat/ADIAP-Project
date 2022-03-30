@@ -15,7 +15,7 @@ class WelcomeScaffold extends StatelessWidget {
           const Expanded(
             child: Center(
                 child: Text('Bienvenue dans ADIAP')
-            ),
+            )
           ),
           ElevatedButton(
               child: const Text('Créer mon profil'),
