@@ -1,10 +1,10 @@
-import 'package:adiap/activity_screen.dart';
+import 'package:adiap/screens/activity_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:adiap/welcome_screen.dart';
-import 'package:adiap/main_screen.dart';
-import 'package:adiap/knowledge_screen.dart';
-import 'package:adiap/parameter_screen.dart';
-import 'package:adiap/profile_screen.dart';
+import 'package:adiap/screens/welcome_screen.dart';
+import 'package:adiap/screens/main_screen.dart';
+import 'package:adiap/screens/knowledge_screen.dart';
+import 'package:adiap/screens/parameter_screen.dart';
+import 'package:adiap/screens/profile_screen.dart';
 
 class WelcomeRoute extends StatelessWidget {
   const WelcomeRoute({Key? key}) : super(key: key);
