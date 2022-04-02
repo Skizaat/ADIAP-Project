@@ -122,9 +122,9 @@ class MyCustomFormState extends State<MyCustomForm> {
                   // If the form is valid, display a snackbar. In the real world,
                   // you'd often call a server or save the information in a database.
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Processing Data')),
+                    const SnackBar(content: Text('Processing Data...')),
                   );
-                  _save();
+                  _save(name, weight);
                   _read();
                 }
               },
@@ -147,16 +147,16 @@ class MyCustomFormState extends State<MyCustomForm> {
   _read() async {
     final prefs = await SharedPreferences.getInstance();
     const key = 'weight';
-    final value = prefs.getString(key);
-    print('read: $value');
-    if(value != null) {
+    final poids = prefs.getInt("weight");
+    print('read ---- $poids');
+    if(poids != null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('read : $value')),
+        SnackBar(content: Text('read -: $poids')),
       );
     }
   }
 
-  _save() async {
+  _save(String? name, int? weight) async {
     final prefs = await SharedPreferences.getInstance();
     const key = 'treatment';
     final value = _trt;
@@ -168,11 +168,11 @@ class MyCustomFormState extends State<MyCustomForm> {
       val="Pompe à insuline";
     }
     prefs.setString(key, val);
-    print('saved $val');
-    if(value != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('saved : $val')),
-      );
-    }
+    prefs.setString("name",name!);
+    prefs.setInt("weight", weight!);
+    print('saved --  $val');
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('saved : $val , $name , $weight')),
+    );
   }
 }
