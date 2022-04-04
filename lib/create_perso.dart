@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import "package:shared_preferences/shared_preferences.dart";
+import 'package:adiap/routes.dart';
 
-void main() => runApp(const MyApp());
+void main_profile() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -134,9 +135,9 @@ class MyCustomFormState extends State<MyCustomForm> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
-              child: const Text('Read'),
+              child: const Text('Go to main menu'),
               onPressed: () {
-                _read();
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const MainRoute()));
               },
             ),
           ),

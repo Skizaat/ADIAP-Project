@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:adiap/routes.dart';
+import 'package:adiap/create_perso.dart';
 
 class WelcomeScaffold extends StatelessWidget {
   const WelcomeScaffold({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class WelcomeScaffold extends StatelessWidget {
           ElevatedButton(
               child: const Text('Créer mon profil'),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const MainRoute()));
+                main_profile();
               }
           ),
         ],
