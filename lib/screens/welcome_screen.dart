@@ -21,6 +21,7 @@ class WelcomeScaffold extends StatelessWidget {
           ElevatedButton(
               child: const Text('Créer mon profil'),
               onPressed: () {
+                print("welcome");
                 main_profile();
               }
           ),

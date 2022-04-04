@@ -1,6 +1,8 @@
+import 'package:adiap/Classes/activity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:adiap/routes.dart';
+import 'package:adiap/ActivityDatabase.dart';
 
 
 
@@ -105,6 +107,9 @@ class MainScaffold extends StatelessWidget {
             ElevatedButton(
                 child: const Text("Créez une activité"),
                 onPressed: () {
+                  Activity tennis = const Activity(idActivity: 2, nameActivity: "tennis", intensity: "légère", day: "jeudi", hour: 15);
+                  SQLiteDbProvider.db.insert(tennis);
+                  SQLiteDbProvider.db.getAllActivities();
                   Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityRoute()));
                 },
 

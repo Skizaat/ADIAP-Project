@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 
-import 'User.dart';
+import 'Classes/User.dart';
 
 class FileHandler {
 

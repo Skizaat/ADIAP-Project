@@ -8,6 +8,7 @@ class Activity {
   final String intensity;
   final String day;
   final int hour;
+  static final columns = ["idActivity", "nameActivity", "intensity", "day", "hour"];
 
   const Activity ({
     required this.idActivity,
@@ -16,6 +17,12 @@ class Activity {
     required this.day,
     required this.hour,
   });
+
+  factory Activity.fromMap(Map<dynamic, dynamic> data) {
+    return Activity(
+      idActivity: data["idActivity"], nameActivity: data['nameActivity'], intensity: data['intensity'], day: data['day'], hour: data['hour'],
+    );
+  }
 
   Map<String, dynamic> toMap() {
     return {
