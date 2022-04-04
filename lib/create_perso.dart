@@ -131,7 +131,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               child: const Text('Submit'),
             ),
           ),
-          Padding(
+          /*Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               child: const Text('Read'),
@@ -139,7 +139,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 _read();
               },
             ),
-          ),
+          ),*/
         ],
       ),
     );
@@ -147,7 +147,7 @@ class MyCustomFormState extends State<MyCustomForm> {
   _read() async {
     final prefs = await SharedPreferences.getInstance();
     const key = 'weight';
-    final poids = prefs.getInt("weight");
+    final poids = prefs.getInt(key);
     print('read ---- $poids');
     if(poids != null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -170,6 +170,7 @@ class MyCustomFormState extends State<MyCustomForm> {
     prefs.setString(key, val);
     prefs.setString("name",name!);
     prefs.setInt("weight", weight!);
+    prefs.setBool("validated",true);
     print('saved --  $val');
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('saved : $val , $name , $weight')),
