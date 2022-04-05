@@ -36,6 +36,7 @@ class ActivityScaffold extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const OneActivityRoute()));
               },
               child: ListView.builder(
+                      scrollDirection: Axis.vertical,
                       itemCount: data.length,
                       itemBuilder: (BuildContext context,int index){
                       return ListTile(

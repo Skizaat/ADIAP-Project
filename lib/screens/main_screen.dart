@@ -92,30 +92,67 @@ class MainScaffold extends StatelessWidget {
           )
 
         ),
-        body: Column(
-          children: [
-            const Expanded(
-                child: Center(
-                  child: Text("Mes Activités à venir")
-                )
-            ),
-            const Expanded(
-                child: Center(
-                  child: Text("Pas d'activités à venir pour l'instant"),
-                )
-            ),
-            ElevatedButton(
-                child: const Text("Créez une activité"),
-                onPressed: () {
-                  Activity tennis = const Activity(idActivity: 2, nameActivity: "tennis", intensity: "légère", day: "jeudi", hour: 15);
-                  SQLiteDbProvider.db.insert(tennis);
-                  SQLiteDbProvider.db.getAllActivities();
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityRoute()));
-                },
+        body: Flex(
+          direction: Axis.vertical,
+            children: [
+              Expanded(
+                  child: Center(
+                    child: Text("Mes Activités")
+                  )
+              ),
+              Expanded(
+                child: SizedBox (
+                  width: 300,
+                  height: 100,
+                  child: FutureBuilder(
+                    builder: (ctx, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.hasError) {
+                          return Center(
+                            child: Text('${snapshot.error} occured',
+                            style: TextStyle(fontSize: 18),
+                            ),
+                          );
+                        } else if (snapshot.hasData) {
+                            final data = snapshot.data as List<Activity>;
+                            String name = data[1].getNameActivity();
+                            String day = data[1].getDay();
+                            int hour = data[1].getHour();
+                            return Scaffold(
+                              body: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const OneActivityRoute()));
+                                },
+                                child: Row(
+                                  children: [
+                                    Expanded(child: const Icon(Icons.emoji_events)),
+                                    Expanded(child: Text("$name")),
+                                    Expanded(child: Text("le $day à $hour h")),
+                                  ],
 
-            )
-          ],
-        )
+                                )
+                              ),
+                            );
+                        }
+                      }
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                    },
+                  future: SQLiteDbProvider.db.getAllActivities(),
+                  ))),
+              Expanded(child: ElevatedButton(
+                  child: const Text("Créez une activité"),
+                  onPressed: () {
+                    Activity tennis = const Activity(idActivity: 2, nameActivity: "tennis", intensity: "légère", day: "jeudi", hour: 15);
+                    SQLiteDbProvider.db.insert(tennis);
+                    SQLiteDbProvider.db.getAllActivities();
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityRoute()));
+                  },
+              )
+              )
+            ],
+          )
       ),
     );
   }
