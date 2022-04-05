@@ -1,5 +1,6 @@
+import 'package:adiap/Classes/activity.dart';
 import 'package:adiap/screens/activity_screen.dart';
-import 'package:adiap/screens/one_Activity.dart';
+import 'package:adiap/screens/one_Activity_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:adiap/screens/welcome_screen.dart';
 import 'package:adiap/screens/main_screen.dart';
@@ -62,10 +63,12 @@ class ParameterRoute extends StatelessWidget {
 }
 
 class OneActivityRoute extends StatelessWidget {
-  const OneActivityRoute({Key? key}) : super(key: key);
+  final Activity currentActivity;
+
+  const OneActivityRoute({Key, key, required this.currentActivity,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const OneActivityScaffold();
+    return OneActivityScaffold(currentActivity: currentActivity,);
   }
 }

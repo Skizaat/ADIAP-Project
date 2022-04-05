@@ -38,7 +38,7 @@ class ActivityScaffold extends StatelessWidget {
                     body: GestureDetector(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => const OneActivityRoute()));
+                            builder: (context) => OneActivityRoute(currentActivity: data[0])));
                       },
                       child: ListView.builder(
                           scrollDirection: Axis.vertical,
