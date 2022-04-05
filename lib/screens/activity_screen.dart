@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:adiap/ActivityDatabase.dart';
 import 'package:adiap/Classes/activity.dart';
 import 'package:path/path.dart';
+import 'package:adiap/routes.dart';
 
 class ActivityScaffold extends StatelessWidget {
   const ActivityScaffold({Key? key}) : super(key: key);
@@ -10,10 +11,10 @@ class ActivityScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // Material is a conceptual piece
     // of paper on which the UI appears.
-    return displayActivityWidget();
+    return displayActivityWidget(context);
   }
 
-  Widget displayActivityWidget() {
+  Widget displayActivityWidget(BuildContext context) {
     return FutureBuilder(
       builder: (ctx, snapshot) {
       if (snapshot.connectionState == ConnectionState.done) {
@@ -30,15 +31,20 @@ class ActivityScaffold extends StatelessWidget {
           String day = data[1].getDay();
           int hour = data[1].getHour();
           return Scaffold(
-            body: ListView.builder(
-                itemCount: data.length,
-                itemBuilder: (BuildContext context,int index){
-                  return ListTile(
-                      leading: Icon(Icons.emoji_events),
-                      title: Text("$name"),
-                      trailing: Text("le $day à $hour h"),
-                  );
-                }
+            body: GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const OneActivityRoute()));
+              },
+              child: ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (BuildContext context,int index){
+                      return ListTile(
+                        leading: Icon(Icons.emoji_events),
+                        title: Text("$name"),
+                        trailing: Text("le $day à $hour h"),
+                    );
+                  }
+              ),
             ),
           );
         }
