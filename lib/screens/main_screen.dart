@@ -123,14 +123,17 @@ class MainScaffold extends StatelessWidget {
                                 onTap: () {
                                   Navigator.push(context, MaterialPageRoute(builder: (context) => const OneActivityRoute()));
                                 },
-                                child: Row(
-                                  children: [
-                                    Expanded(child: const Icon(Icons.emoji_events)),
-                                    Expanded(child: Text("$name")),
-                                    Expanded(child: Text("le $day à $hour h")),
-                                  ],
-
-                                )
+                                child: ListView.builder(
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: data.length,
+                                    itemBuilder: (BuildContext context,int index){
+                                      return ListTile(
+                                        leading: Icon(Icons.emoji_events),
+                                        title: Text("$name"),
+                                        trailing: Text("le $day à $hour h"),
+                                      );
+                                    }
+                                ),
                               ),
                             );
                         }
@@ -141,7 +144,7 @@ class MainScaffold extends StatelessWidget {
                     },
                   future: SQLiteDbProvider.db.getAllActivities(),
                   ))),
-              Expanded(child: ElevatedButton(
+              ElevatedButton(
                   child: const Text("Créez une activité"),
                   onPressed: () {
                     Activity tennis = const Activity(idActivity: 2, nameActivity: "tennis", intensity: "légère", day: "jeudi", hour: 15);
@@ -149,7 +152,6 @@ class MainScaffold extends StatelessWidget {
                     SQLiteDbProvider.db.getAllActivities();
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityRoute()));
                   },
-              )
               )
             ],
           )
