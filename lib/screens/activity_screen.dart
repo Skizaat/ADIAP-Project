@@ -10,10 +10,10 @@ class ActivityScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // Material is a conceptual piece
     // of paper on which the UI appears.
-    return projectWidget();
+    return displayActivityWidget();
   }
 
-  Widget projectWidget() {
+  Widget displayActivityWidget() {
     return FutureBuilder(
       builder: (ctx, snapshot) {
       if (snapshot.connectionState == ConnectionState.done) {
@@ -49,27 +49,7 @@ class ActivityScaffold extends StatelessWidget {
         },
       future: SQLiteDbProvider.db.getAllActivities(),
     );
-
   }
 }
 
-class ListViewBuilder extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView.builder(
-          itemCount: 5,
-          itemBuilder: (BuildContext context,int index){
-            return ListTile(
-                leading: Icon(Icons.list),
-                trailing: Text("GFG",
-                  style: TextStyle(
-                      color: Colors.green,fontSize: 15),),
-                title:Text("List item $index")
-            );
-          }
-      ),
-    );
-  }
-}
 
