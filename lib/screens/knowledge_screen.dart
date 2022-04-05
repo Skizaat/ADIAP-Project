@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:adiap/ActivityDatabase.dart';
 
 class KnowledgeScaffold extends StatelessWidget {
   const KnowledgeScaffold({Key? key}) : super(key: key);
@@ -7,9 +8,14 @@ class KnowledgeScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // Material is a conceptual piece
     // of paper on which the UI appears.
-    return const Material(
+    return Material(
       child: Center(
-        child: Text("En savoir plus"),
+        child: ElevatedButton(
+          child: const Text("suppr"),
+          onPressed: () {
+              SQLiteDbProvider.db.delete(8);
+          },
+        ),
       ),
     );
   }

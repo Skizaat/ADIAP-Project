@@ -95,7 +95,7 @@ class MainScaffold extends StatelessWidget {
         body: Flex(
           direction: Axis.vertical,
             children: [
-              Expanded(
+              const Expanded(
                   child: Center(
                     child: Text("Mes Activités")
                   )
@@ -115,27 +115,37 @@ class MainScaffold extends StatelessWidget {
                           );
                         } else if (snapshot.hasData) {
                             final data = snapshot.data as List<Activity>;
-                            String name = data[1].getNameActivity();
-                            String day = data[1].getDay();
-                            int hour = data[1].getHour();
-                            return Scaffold(
-                              body: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const OneActivityRoute()));
-                                },
-                                child: ListView.builder(
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: data.length,
-                                    itemBuilder: (BuildContext context,int index){
-                                      return ListTile(
-                                        leading: Icon(Icons.emoji_events),
-                                        title: Text("$name"),
-                                        trailing: Text("le $day à $hour h"),
-                                      );
-                                    }
+                            if (data.isEmpty) {
+                              return const Center(
+                                child: Text("Vous n'avez pas d'activité d'enregistrée"),
+                              );
+                            } else {
+                              return Scaffold(
+                                body: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(
+                                        builder: (
+                                            context) => const OneActivityRoute()));
+                                  },
+                                  child: ListView.builder(
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: data.length,
+                                      itemBuilder: (BuildContext context,
+                                          int index) {
+                                        String name = data[index]
+                                            .getNameActivity();
+                                        String day = data[index].getDay();
+                                        int hour = data[index].getHour();
+                                        return ListTile(
+                                          leading: Icon(Icons.emoji_events),
+                                          title: Text("$name"),
+                                          trailing: Text("le $day à $hour h"),
+                                        );
+                                      }
+                                  ),
                                 ),
-                              ),
-                            );
+                              );
+                            }
                         }
                       }
                     return const Center(
@@ -147,12 +157,9 @@ class MainScaffold extends StatelessWidget {
               ElevatedButton(
                   child: const Text("Créez une activité"),
                   onPressed: () {
-                    Activity tennis = const Activity(idActivity: 2, nameActivity: "tennis", intensity: "légère", day: "jeudi", hour: 15);
-                    SQLiteDbProvider.db.insert(tennis);
-                    SQLiteDbProvider.db.getAllActivities();
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityRoute()));
                   },
-              )
+              ),
             ],
           )
       ),

@@ -15,48 +15,56 @@ class ActivityScaffold extends StatelessWidget {
   }
 
   Widget displayActivityWidget(BuildContext context) {
-    return FutureBuilder(
-      builder: (ctx, snapshot) {
-      if (snapshot.connectionState == ConnectionState.done) {
-        if (snapshot.hasError) {
-          return Center(
-            child: Text(
-              '${snapshot.error} occured',
-              style: TextStyle(fontSize: 18),
-            ),
-          );
-        } else if (snapshot.hasData) {
-          final data = snapshot.data as List<Activity>;
-          String name = data[1].getNameActivity();
-          String day = data[1].getDay();
-          int hour = data[1].getHour();
-          return Scaffold(
-            body: GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const OneActivityRoute()));
-              },
-              child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      itemCount: data.length,
-                      itemBuilder: (BuildContext context,int index){
-                      return ListTile(
-                        leading: Icon(Icons.emoji_events),
-                        title: Text("$name"),
-                        trailing: Text("le $day à $hour h"),
-                    );
-                  }
-              ),
-            ),
-          );
-        }
-      }
-          return const Center(
-            child: CircularProgressIndicator(),
+    return SizedBox(
+        width: 300,
+        height: 100,
+        child: FutureBuilder(
+          builder: (ctx, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text('${snapshot.error} occured',
+                    style: const TextStyle(fontSize: 18),
+                  ),
                 );
-        },
-      future: SQLiteDbProvider.db.getAllActivities(),
+              } else if (snapshot.hasData) {
+                final data = snapshot.data as List<Activity>;
+                print("la liste est actuellement $data");
+                if (data.isEmpty) {
+                  return const Text("Vous n'avez pas d'activité d'enregistrée",
+                    style: TextStyle(fontSize: 18),);
+                } else {
+                  return Scaffold(
+                    body: GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) => const OneActivityRoute()));
+                      },
+                      child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          itemCount: data.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            String name = data[index].getNameActivity();
+                            String day = data[index].getDay();
+                            int hour = data[index].getHour();
+                            return ListTile(
+                              leading: Icon(Icons.emoji_events),
+                              title: Text("$name"),
+                              trailing: Text("le $day à $hour h"),
+                            );
+                          }
+                      ),
+                    ),
+                  );
+                }
+              }
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+          future: SQLiteDbProvider.db.getAllActivities(),
+        )
     );
   }
 }
-
-
