@@ -39,6 +39,19 @@ class Activity {
     return 'Activity{idActivity: $idActivity, nameActivity: $nameActivity, intensity: $intensity, day: $day, hour: $hour}';
   }
 
+  String getNameActivity() {
+    return nameActivity;
+  }
+
+  String getDay() {
+    return day;
+  }
+
+  int getHour() {
+    return hour;
+  }
+
+
 
 }
 
