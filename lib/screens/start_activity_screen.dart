@@ -112,6 +112,9 @@ class StartingFormState extends State<StartingForm> {
                 FilteringTextInputFormatter.digitsOnly
               ], // Only numbers can be entered
               validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'rentrez les informations';
+                }
                 return null;
               },
             ),

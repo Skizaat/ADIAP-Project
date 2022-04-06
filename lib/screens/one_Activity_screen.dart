@@ -2,6 +2,7 @@ import 'package:adiap/ActivityDatabase.dart';
 import 'package:flutter/material.dart';
 import 'package:adiap/Classes/activity.dart';
 import 'package:adiap/routes.dart';
+import 'package:adiap/OneActivityDatabase.dart';
 
 class OneActivityScaffold extends StatelessWidget {
   final Activity currentActivity;
@@ -45,7 +46,8 @@ class OneActivityScaffold extends StatelessWidget {
                         child: ElevatedButton(
                           child: Text('Historique'),
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HistoricActivityRoute(concernedActivity: currentActivity)));
+                            OneSQLiteDbProvider.db.getbyIdAssociatedActivity(currentActivity.idActivity);
+                            //Navigator.push(context, MaterialPageRoute(builder: (context) => HistoricActivityRoute(concernedActivity: currentActivity)));
                           },
                         ),
                       ),
