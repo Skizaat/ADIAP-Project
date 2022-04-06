@@ -158,10 +158,10 @@ class MainScaffold extends StatelessWidget {
               ElevatedButton(
                   child: const Text("Créez une activité"),
                   onPressed: () {
-                    Activity Tennis = new Activity(idActivity: 1, nameActivity: "Tennis", intensity: "Légère", day: "Mardi", hour: 14);
-                    Activity Hanball = new Activity(idActivity: 1, nameActivity: "Hanball", intensity: "Légère", day: "Mercredi", hour: 17);
-                    SQLiteDbProvider.db.insert(Tennis);
-                    SQLiteDbProvider.db.insert(Hanball);
+                    //Activity Tennis = new Activity(idActivity: 2, nameActivity: "Tennis", intensity: "Légère", day: "Mardi", hour: 14);
+                    //Activity Hanball = new Activity(idActivity: 3, nameActivity: "Hanball", intensity: "Légère", day: "Mercredi", hour: 17);
+                    //SQLiteDbProvider.db.insert(Tennis);
+                    //SQLiteDbProvider.db.insert(Hanball);
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityRoute()));
                   },
               ),
