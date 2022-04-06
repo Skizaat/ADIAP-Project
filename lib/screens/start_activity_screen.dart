@@ -112,9 +112,6 @@ class StartingFormState extends State<StartingForm> {
                 FilteringTextInputFormatter.digitsOnly
               ], // Only numbers can be entered
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'rentrez les informations';
-                }
                 return null;
               },
             ),
@@ -136,14 +133,22 @@ class StartingFormState extends State<StartingForm> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  OneActivity NewOne = OneActivity(idOne: 1, aimglycemie: int.parse(aimController.text), actglycemie: int.parse(glycemieController.text), timebefore: int.parse(beforeActController.text), timemeal: int.parse(mealController.text), idAssociatedActivity: startingActivity.idActivity, date: DateFormat("yyyy-MM-dd").format(DateTime.now()));
-                  //OneSQLiteDbProvider.db.insert(NewOne);
-                  OneSQLiteDbProvider.db.getAllOnes();
-                  //OneSQLiteDbProvider.db.delete(5);
-                  print(aimController.text);
-                  print(glycemieController.text);
-                  print(beforeActController.text);
-                  print(mealController.text);
+                  if (_formKey.currentState!.validate()) {
+                    OneActivity NewOne = OneActivity(idOne: 1,
+                        aimglycemie: int.parse(aimController.text),
+                        actglycemie: int.parse(glycemieController.text),
+                        timebefore: int.parse(beforeActController.text),
+                        timemeal: int.parse(mealController.text),
+                        idAssociatedActivity: startingActivity.idActivity,
+                        date: DateFormat("yyyy-MM-dd").format(DateTime.now()));
+                    //OneSQLiteDbProvider.db.insert(NewOne);
+                    OneSQLiteDbProvider.db.getAllOnes();
+                    //OneSQLiteDbProvider.db.delete(5);
+                    print(aimController.text);
+                    print(glycemieController.text);
+                    print(beforeActController.text);
+                    print(mealController.text);
+                  }
                 },
                 child: Text('Valider')
             )
