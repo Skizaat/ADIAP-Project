@@ -144,7 +144,7 @@ class StartingFormState extends State<StartingForm> {
                         timemeal: int.parse(mealController.text),
                         idAssociatedActivity: startingActivity.idActivity,
                         date: DateFormat("yyyy-MM-dd").format(DateTime.now()));
-                    //OneSQLiteDbProvider.db.insert(NewOne);
+                    OneSQLiteDbProvider.db.insert(NewOne);
                     OneSQLiteDbProvider.db.getAllOnes();
                     //OneSQLiteDbProvider.db.delete(5);
                     print(aimController.text);

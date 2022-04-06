@@ -110,7 +110,7 @@ class HistoricActivityScaffold extends StatelessWidget {
     return ElevatedButton(
       child: Text('Vider l historique'),
       onPressed: () {
-        OneSQLiteDbProvider.db.getbyIdAssociatedActivity(activity.idActivity);
+        OneSQLiteDbProvider.db.deleteByActivityId(activity.idActivity);
         Navigator.push(context, MaterialPageRoute(builder: (context) => OneActivityRoute(currentActivity: activity)));
       },
     );

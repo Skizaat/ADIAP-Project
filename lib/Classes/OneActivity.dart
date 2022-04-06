@@ -58,4 +58,8 @@ class OneActivity {
   int gettimebefore() {
     return timebefore;
   }
+
+  int getidOne() {
+    return idOne;
+  }
 }

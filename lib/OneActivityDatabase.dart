@@ -55,6 +55,21 @@ class OneSQLiteDbProvider {
     return results;
   }
 
+  deleteByActivityId(int id) async {
+    final db = await database;
+    var result = await db?.query("OnesActivity", where: "idAssociatedActivity = ?", whereArgs: [id]);
+    List<OneActivity> results = [];
+    result?.forEach((elem) {
+      OneActivity One = OneActivity.fromMap(elem);
+      results.add(One);
+    });
+    results.forEach((element) {
+      delete(element.getidOne());
+    });
+    print(results);
+    return results;
+  }
+
   insert(OneActivity One) async {
     print("avant insert");
     final db = await database;
