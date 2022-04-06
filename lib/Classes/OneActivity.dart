@@ -28,6 +28,8 @@ class OneActivity {
     );
   }
 
+  get getdate => date;
+
   Map<String, dynamic> toMap() {
     return {
       'idOne' : idOne,
@@ -43,5 +45,17 @@ class OneActivity {
   @override
   String toString() {
     return 'OneActivity{idOne: $idOne, aimglycemie: $aimglycemie, actglycemie: $actglycemie, timebefore: $timebefore, timemeal: $timemeal, idAssociatedActivity: $idAssociatedActivity, date: $date}';
+  }
+
+  int getactglycemie() {
+    return actglycemie;
+  }
+
+  int getaimglycemie() {
+    return aimglycemie;
+  }
+
+  int gettimebefore() {
+    return timebefore;
   }
 }

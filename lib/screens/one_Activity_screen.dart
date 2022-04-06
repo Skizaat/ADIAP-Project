@@ -47,7 +47,7 @@ class OneActivityScaffold extends StatelessWidget {
                           child: Text('Historique'),
                           onPressed: () {
                             OneSQLiteDbProvider.db.getbyIdAssociatedActivity(currentActivity.idActivity);
-                            //Navigator.push(context, MaterialPageRoute(builder: (context) => HistoricActivityRoute(concernedActivity: currentActivity)));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => HistoricActivityRoute(concernedActivity: currentActivity)));
                           },
                         ),
                       ),
