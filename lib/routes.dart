@@ -9,6 +9,7 @@ import 'package:adiap/screens/parameter_screen.dart';
 import 'package:adiap/screens/profile_screen.dart';
 import 'package:adiap/screens/start_activity_screen.dart';
 import 'package:adiap/screens/activity_historic.dart';
+import 'package:adiap/create_perso.dart';
 
 class WelcomeRoute extends StatelessWidget {
   const WelcomeRoute({Key? key}) : super(key: key);
@@ -95,4 +96,14 @@ class HistoricActivityRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return HistoricActivityScaffold(concernedActivity: concernedActivity,);
   }
+}
+
+class UserFormRoute extends StatelessWidget{
+  const UserFormRoute({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const CreateUserScaffold();
+  }
+
 }

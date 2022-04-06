@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class User extends Equatable{
+class User{
   const User({
     required this.id,
     required this.name,
@@ -12,8 +12,28 @@ class User extends Equatable{
   final String name;
   final int weight;
   final int diabTreatment;
+  static final columns = ['id', 'name', 'weight', 'diabTreatment'];
 
-  User.fromJson(Map<String, dynamic> map)
+  factory User.fromMap(Map<dynamic, dynamic> data) {
+    return User(id: data["id"], name: data['name'], weight: data['weight'], diabTreatment: data['diabTreatment']);
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'weight': weight,
+      'diabTreatment': diabTreatment,
+    };
+  }
+
+  @override
+  String toString() {
+    return 'User:\n\tId: $id\n\tName: $name\n\tWeight: $weight\n\tTreatement: $diabTreatment\n\t';
+  }
+
+
+  /*User.fromJson(Map<String, dynamic> map)
       : id = (map['id'] as num).toInt(),
         name = map['name'] as String,
         weight = (map['weight'] as num).toInt() ,
@@ -34,5 +54,5 @@ class User extends Equatable{
   }
 
   @override
-  List<Object> get props => [name, id, weight, diabTreatment];
+  List<Object> get props => [name, id, weight, diabTreatment];*/
 }

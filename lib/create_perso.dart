@@ -3,24 +3,17 @@ import 'package:flutter/services.dart';
 import "package:shared_preferences/shared_preferences.dart";
 import 'package:adiap/routes.dart';
 
-void main_profile() => runApp(const MyApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+
+
+class CreateUserScaffold extends StatelessWidget {
+  const CreateUserScaffold({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    const appTitle = 'Form Validation';
-
-    return MaterialApp(
-      title: appTitle,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(appTitle),
-        ),
+    return Scaffold(
         body: const MyCustomForm(),
-      ),
-    );
+      );
   }
 }
 
@@ -56,65 +49,96 @@ class MyCustomFormState extends State<MyCustomForm> {
     String? name;
     int? weight;
     return Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TextFormField(
-            decoration: const InputDecoration(labelText: "Prénom"),
-            onSaved: (value){name=value;},
-            // The validator receives the text that the user has entered.
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Entrez votre prénom';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            onSaved: (value){weight=value as int;},
-            decoration: const InputDecoration(labelText: "Poids"),
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.digitsOnly
-            ], // Only numbers can be entered
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Entrez votre poids';
-              }
-              return null;
-            },
-          ),
-          ListTile(
-            title: const Text('Pompe à insuline'),
-            leading: Radio(
-              value: DiabTreatment.insu_pump,
-              groupValue: _trt,
-              onChanged:(val){
-                setState(() {
-                  _trt=DiabTreatment.insu_pump;
-                });
-              },
-              activeColor: Colors.green,
-              toggleable: true,
-            ),
-          ),
-          ListTile(
-            title: const Text('Multi injection d insulines'),
-            leading: Radio(
-              value: DiabTreatment.multi_inj,
-              groupValue: _trt,
-              onChanged: (val) {
-                setState(() {
-                  _trt = DiabTreatment.multi_inj;
-                });
-              },
-              activeColor: Colors.green,
-              toggleable: true,
-            ),
-          ),
+        key: _formKey,
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(labelText: "Prénom"),
+                onSaved: (value) {
+                  name = value;
+                },
+                // The validator receives the text that the user has entered.
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Entrez votre prénom';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                onSaved: (value) {
+                  weight = value as int;
+                },
+                decoration: const InputDecoration(labelText: "Poids"),
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly
+                ],
+                // Only numbers can be entered
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Entrez votre poids';
+                  }
+                  return null;
+                },
+              ),
+              ListTile(
+                title: const Text('Pompe à insuline'),
+                leading: Radio(
+                  value: DiabTreatment.insu_pump,
+                  groupValue: _trt,
+                  onChanged: (val) {
+                    setState(() {
+                      _trt = DiabTreatment.insu_pump;
+                    });
+                  },
+                  activeColor: Colors.green,
+                  toggleable: true,
+                ),
+              ),
+              ListTile(
+                title: const Text('Multi injection d insulines'),
+                leading: Radio(
+                  value: DiabTreatment.multi_inj,
+                  groupValue: _trt,
+                  onChanged: (val) {
+                    setState(() {
+                      _trt = DiabTreatment.multi_inj;
+                    });
+                  },
+                  activeColor: Colors.green,
+                  toggleable: true,
+                ),
+              ),
+              ElevatedButton(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {}
+                    /*if (_formKey.currentState!.validate()) {
+                      OneActivity NewOne = OneActivity(idOne: 1,
+                          aimglycemie: int.parse(aimController.text),
+                          actglycemie: int.parse(glycemieController.text),
+                          timebefore: int.parse(beforeActController.text),
+                          timemeal: int.parse(mealController.text),
+                          idAssociatedActivity: startingActivity.idActivity,
+                          date: DateFormat("yyyy-MM-dd").format(DateTime.now()));
+                      await OneSQLiteDbProvider.db.insert(NewOne);
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => HistoricActivityRoute(concernedActivity: startingActivity)));
+                    }*/
+                  },
+                  child: Text("Valider")
+              )
+            ]
+        )
+    );
+  }
 
-          Padding(
+
+
+
+
+
+          /*Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
@@ -176,4 +200,6 @@ class MyCustomFormState extends State<MyCustomForm> {
       SnackBar(content: Text('saved : $val , $name , $weight')),
     );
   }
+
+  */
 }

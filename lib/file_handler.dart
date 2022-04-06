@@ -1,4 +1,87 @@
-import 'dart:convert';
+import 'dart:async';
+import 'dart:io';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:sqflite/sqflite.dart';
+import 'Classes/User.dart';
+
+
+class UserSQLiteDbProvider {
+  UserSQLiteDbProvider._();
+  static final UserSQLiteDbProvider db = UserSQLiteDbProvider._();
+  Database? _database;
+
+  Future<Database?> get database async {
+    if (_database != null) {
+      return _database;
+    }
+    _database = await initDB();
+    return _database;
+  }
+
+  initDB() async {
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, "user_database.db");
+    return await openDatabase(
+        path,
+        version: 1,
+        onCreate: (Database db, int version) async {
+          await db.execute("CREATE TABLE User(id INTEGER PRIMARY KEY, name TEXT, weight TEXT, diabTreatment INTEGER)");
+        });
+  }
+
+  Future<List<User>> getAllOnes() async {
+    final db = await database;
+    List<Map<String, Object?>>? results = await db?.query(
+        "User", columns: User.columns, orderBy: "id ASC");
+    List<User> AllUser = [];
+    results?.forEach((result) {
+      User OneU = User.fromMap(result);
+      AllUser.add(OneU);
+    });
+    print(AllUser);
+    return AllUser;
+  }
+
+  insert(User user) async {
+    final db = await database;
+    var maxIdResult = await db?.rawQuery("SELECT MAX(idOne)+1 as last_inserted_id FROM OnesActivity");
+    var id = maxIdResult?.first["last_inserted_id"];
+    var result = await db?.rawInsert("INSERT Into User (id, name, weight, diabTreatment)"
+        " VALUES (?, ?, ?, ?)",
+      [id, user.name, user.weight, user.diabTreatment],
+    );
+    return result;
+  }
+
+  update(User user) async {
+    final db = await database;
+    var result = await db?.update(
+        "User", user.toMap(), where: "id = ?", whereArgs: [user.id]
+    );
+    return result;
+  }
+
+  delete(int id) async {
+    final db = await database;
+    db?.delete("User", where: "id = ?", whereArgs: [id]);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*import 'dart:convert';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
@@ -73,5 +156,4 @@ class FileHandler {
     _userSet.removeWhere((e) => e.id == updatedUser.id);
     await writeUser(updatedUser);
   }
-}
-
+}*/
