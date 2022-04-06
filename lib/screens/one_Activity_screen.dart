@@ -1,5 +1,4 @@
-import 'dart:ffi';
-
+import 'package:adiap/ActivityDatabase.dart';
 import 'package:flutter/material.dart';
 import 'package:adiap/Classes/activity.dart';
 
@@ -30,7 +29,7 @@ class OneActivityScaffold extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  margin: EdgeInsets.all(20),
+                  margin: EdgeInsets.all(5),
                   child: Center(
                     child: ElevatedButton(
                       child: Text('Editer'),
@@ -40,11 +39,22 @@ class OneActivityScaffold extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.all(20),
+                  margin: EdgeInsets.all(5),
                   child: Center(
                     child: ElevatedButton(
                       child: Text('Historique'),
                       onPressed: () {
+                      },
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.all(5),
+                  child: Center(
+                    child: ElevatedButton(
+                      child: Text('Supprimer'),
+                      onPressed: () {
+                        SQLiteDbProvider.db.delete(currentActivity.getId());
                       },
                     ),
                   ),
@@ -58,7 +68,7 @@ class OneActivityScaffold extends StatelessWidget {
                 child: ElevatedButton(
                   child: Text('Pratiquer cette activité'),
                   onPressed: () {
-                    Start = true;
+                    //OneActivityStart();
                   },
                 ),
               ),
@@ -68,3 +78,17 @@ class OneActivityScaffold extends StatelessWidget {
     );
   }
 }
+
+/*class OneActivityStart extends StatefulWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text("yo");
+  }
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
+  }
+
+}*/

@@ -51,6 +51,10 @@ class Activity {
     return hour;
   }
 
+  int getId() {
+    return idActivity;
+  }
+
 
 
 }
