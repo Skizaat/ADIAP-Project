@@ -6,9 +6,9 @@ import 'package:sqflite/sqflite.dart';
 import 'Classes/OneActivity.dart';
 
 
-class SQLiteDbProvider {
-  SQLiteDbProvider._();
-  static final SQLiteDbProvider db = SQLiteDbProvider._();
+class OneSQLiteDbProvider {
+  OneSQLiteDbProvider._();
+  static final OneSQLiteDbProvider db = OneSQLiteDbProvider._();
   Database? _database;
 
   Future<Database?> get database async {
@@ -47,14 +47,19 @@ class SQLiteDbProvider {
     print("avant insert");
     final db = await database;
     print("après insert");
-    var maxIdResult = await db?.rawQuery("SELECT MAX(idActivity)+1 as last_inserted_id FROM Activities");
+    var maxIdResult = await db?.rawQuery("SELECT MAX(idOne)+1 as last_inserted_id FROM OnesActivity");
     var id = maxIdResult?.first["last_inserted_id"];
-    var result = await db?.rawInsert("INSERT Into OnesActivity (idOne, aimglycemie, actglycemie, timebefore, timemeal, idAssociatedActivity)"
+    try {var result = await db?.rawInsert("INSERT Into OnesActivity (idOne, aimglycemie, actglycemie, timebefore, timemeal, idAssociatedActivity)"
         " VALUES (?, ?, ?, ?, ?, ?)",
       [id, One.aimglycemie, One.actglycemie, One.timebefore, One.timemeal, One.idAssociatedActivity],
     );
     print("that's ok");
-    return result;
+    return result;}
+    catch (exception) {
+      print('insert didn');
+      print(exception);
+    }
+
   }
 
   update(OneActivity One) async {

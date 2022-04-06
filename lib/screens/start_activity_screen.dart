@@ -5,6 +5,8 @@ import "package:shared_preferences/shared_preferences.dart";
 import 'package:flutter/services.dart';
 import 'package:adiap/routes.dart';
 import 'package:adiap/create_perso.dart';
+import 'package:adiap/OneActivityDatabase.dart';
+import 'package:adiap/Classes/OneActivity.dart';
 
 
 class StartActivityScaffold extends StatelessWidget {
@@ -27,7 +29,7 @@ class StartActivityScaffold extends StatelessWidget {
                   alignment: Alignment.bottomCenter,
                   child: Text("Veuillez renseigner les informations suivantes pour qu'ADIAP vous conseille dans l'adaptation de l'insuline", style: TextStyle(fontSize: 19),),
                 ),
-                const StartingForm(),
+                StartingForm(startingActivity: startingActivity),
               ]
         ),
     );
@@ -36,15 +38,18 @@ class StartActivityScaffold extends StatelessWidget {
 }
 
 class StartingForm extends StatefulWidget {
-  const StartingForm({Key? key}) : super(key: key);
+  final Activity startingActivity;
+  const StartingForm({Key? key, required this.startingActivity}) : super(key: key);
 
   @override
   StartingFormState createState() {
-    return StartingFormState();
+    return StartingFormState(startingActivity: startingActivity);
   }
 }
 
 class StartingFormState extends State<StartingForm> {
+  final Activity startingActivity;
+  StartingFormState({Key? key, required this.startingActivity});
 
   final _formKey = GlobalKey<FormState>();
   TextEditingController aimController = TextEditingController();
@@ -72,6 +77,10 @@ class StartingFormState extends State<StartingForm> {
                   FilteringTextInputFormatter.digitsOnly
                 ], // Only numbers can be entered
                 validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    value = '170';
+                    return null;
+                  }
                   return null;
                 },
               ),
@@ -124,6 +133,9 @@ class StartingFormState extends State<StartingForm> {
             ),
             ElevatedButton(
                 onPressed: () {
+                  OneActivity NewOne = OneActivity(idOne: 1, aimglycemie: int.parse(aimController.text), actglycemie: int.parse(glycemieController.text), timebefore: int.parse(beforeActController.text), timemeal: int.parse(mealController.text), idAssociatedActivity: startingActivity.idActivity);
+                  //OneSQLiteDbProvider.db.insert(NewOne);
+                  OneSQLiteDbProvider.db.getAllOnes();
                   print(aimController.text);
                   print(glycemieController.text);
                   print(beforeActController.text);

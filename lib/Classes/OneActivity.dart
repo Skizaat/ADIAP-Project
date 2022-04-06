@@ -22,7 +22,7 @@ class OneActivity {
 
   factory OneActivity.fromMap(Map<dynamic, dynamic> data) {
     return OneActivity(
-      idOne: data["idOne"], aimglycemie: data['aimglycemie'], actglycemie: data['actglycemie'], timebefore: data['timebefore'], timemeal: data['timemeal'], idAssociatedActivity: data['iidAssociatedActivity'],
+      idOne: data["idOne"], aimglycemie: data['aimglycemie'], actglycemie: data['actglycemie'], timebefore: data['timebefore'], timemeal: data['timemeal'], idAssociatedActivity: data['idAssociatedActivity'],
     );
   }
 
