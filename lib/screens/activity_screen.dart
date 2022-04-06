@@ -34,25 +34,29 @@ class ActivityScaffold extends StatelessWidget {
                     style: TextStyle(fontSize: 18),);
                 } else {
                   return Scaffold(
-                    body: GestureDetector(
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => OneActivityRoute(currentActivity: data[0])));
+                    body: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: data.length,
+                      itemBuilder: (BuildContext context,
+                          int index) {
+                        String name = data[index]
+                            .getNameActivity();
+                        String day = data[index].getDay();
+                        int hour = data[index].getHour();
+                        return SingleChildScrollView(
+                            child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) => OneActivityRoute(currentActivity: data[index])));
+                                },
+                                child: ListTile(
+                                  leading: Icon(Icons.emoji_events),
+                                  title: Text("$name"),
+                                  trailing: Text("le $day à $hour h"),
+                                )
+                            )
+                        );
                       },
-                      child: ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          itemCount: data.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            String name = data[index].getNameActivity();
-                            String day = data[index].getDay();
-                            int hour = data[index].getHour();
-                            return ListTile(
-                              leading: Icon(Icons.emoji_events),
-                              title: Text("$name"),
-                              trailing: Text("le $day à $hour h"),
-                            );
-                          }
-                      ),
                     ),
                   );
                 }

@@ -121,27 +121,29 @@ class MainScaffold extends StatelessWidget {
                               );
                             } else {
                               return Scaffold(
-                                body: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(
-                                        builder: (context) => OneActivityRoute(currentActivity: data[0])));
-                                  },
-                                  child: ListView.builder(
-                                      scrollDirection: Axis.vertical,
-                                      itemCount: data.length,
-                                      itemBuilder: (BuildContext context,
-                                          int index) {
-                                        String name = data[index]
-                                            .getNameActivity();
-                                        String day = data[index].getDay();
-                                        int hour = data[index].getHour();
-                                        return ListTile(
-                                          leading: Icon(Icons.emoji_events),
-                                          title: Text("$name"),
-                                          trailing: Text("le $day à $hour h"),
-                                        );
-                                      }
-                                  ),
+                                body: ListView.builder(
+                                        scrollDirection: Axis.vertical,
+                                        itemCount: data.length,
+                                        itemBuilder: (BuildContext context,
+                                            int index) {
+                                          String name = data[index]
+                                              .getNameActivity();
+                                          String day = data[index].getDay();
+                                          int hour = data[index].getHour();
+                                          return SingleChildScrollView(
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(context, MaterialPageRoute(
+                                                    builder: (context) => OneActivityRoute(currentActivity: data[index])));
+                                              },
+                                              child: ListTile(
+                                                leading: Icon(Icons.emoji_events),
+                                                title: Text("$name"),
+                                                trailing: Text("le $day à $hour h"),
+                                              )
+                                            )
+                                          );
+                                        },
                                 ),
                               );
                             }
@@ -156,6 +158,10 @@ class MainScaffold extends StatelessWidget {
               ElevatedButton(
                   child: const Text("Créez une activité"),
                   onPressed: () {
+                    Activity Tennis = new Activity(idActivity: 1, nameActivity: "Tennis", intensity: "Légère", day: "Mardi", hour: 14);
+                    Activity Hanball = new Activity(idActivity: 1, nameActivity: "Hanball", intensity: "Légère", day: "Mercredi", hour: 17);
+                    SQLiteDbProvider.db.insert(Tennis);
+                    SQLiteDbProvider.db.insert(Hanball);
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityRoute()));
                   },
               ),
