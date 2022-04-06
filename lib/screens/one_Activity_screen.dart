@@ -10,7 +10,6 @@ class OneActivityScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool Start = false;
     // Material is a conceptual piece
     // of paper on which the UI appears.
     return Container(
@@ -70,7 +69,7 @@ class OneActivityScaffold extends StatelessWidget {
                 child: ElevatedButton(
                   child: Text('Pratiquer cette activité'),
                   onPressed: () {
-                    //OneActivityStart();
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => StartActivityRoute(startingActivity: currentActivity)));
                   },
                 ),
               ),
@@ -80,17 +79,3 @@ class OneActivityScaffold extends StatelessWidget {
     );
   }
 }
-
-/*class OneActivityStart extends StatefulWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Text("yo");
-  }
-
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
-
-}*/

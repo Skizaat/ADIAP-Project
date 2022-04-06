@@ -7,6 +7,7 @@ import 'package:adiap/screens/main_screen.dart';
 import 'package:adiap/screens/knowledge_screen.dart';
 import 'package:adiap/screens/parameter_screen.dart';
 import 'package:adiap/screens/profile_screen.dart';
+import 'package:adiap/screens/start_activity_screen.dart';
 
 class WelcomeRoute extends StatelessWidget {
   const WelcomeRoute({Key? key}) : super(key: key);
@@ -70,5 +71,16 @@ class OneActivityRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OneActivityScaffold(currentActivity: currentActivity,);
+  }
+}
+
+class StartActivityRoute extends StatelessWidget {
+  final Activity startingActivity;
+
+  const StartActivityRoute({Key, key, required this.startingActivity}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return StartActivityScaffold(startingActivity: startingActivity,);
   }
 }
