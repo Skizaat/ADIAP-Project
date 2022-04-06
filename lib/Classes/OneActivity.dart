@@ -28,7 +28,6 @@ class OneActivity {
     );
   }
 
-  get getdate => date;
 
   Map<String, dynamic> toMap() {
     return {
@@ -61,5 +60,9 @@ class OneActivity {
 
   int getidOne() {
     return idOne;
+  }
+
+  String getdate() {
+    return date;
   }
 }

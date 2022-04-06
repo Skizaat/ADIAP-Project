@@ -56,7 +56,7 @@ class HistoricActivityScaffold extends StatelessWidget {
                         itemCount: data.length,
                         itemBuilder: (BuildContext context,
                             int index) {
-                          String date = data[index].getdate[index];
+                          String date = data[index].getdate();
                           int startglycemie = data[index].getactglycemie();
                           int aimglycemie = data[index].getaimglycemie();
                           int timebefore = data[index].gettimebefore();
