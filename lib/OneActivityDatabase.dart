@@ -26,14 +26,14 @@ class OneSQLiteDbProvider {
         path,
         version: 1,
         onCreate: (Database db, int version) async {
-          await db.execute("CREATE TABLE OnesActivity(idOne INTEGER PRIMARY KEY, aimglycemie INTEGER, actglycemie INTEGER, timebefore INTEGER, timemeal INTEGER, idAssociatedActivity INTEGER)");
+          await db.execute("CREATE TABLE OnesActivity(idOne INTEGER PRIMARY KEY, aimglycemie INTEGER, actglycemie INTEGER, timebefore INTEGER, timemeal INTEGER, idAssociatedActivity INTEGER, date TEXT)");
         });
   }
 
   Future<List<OneActivity>> getAllOnes() async {
     final db = await database;
     List<Map<String, Object?>>? results = await db?.query(
-        "OnesActivity", columns: OneActivity.columns, orderBy: "idOne ASC");
+        "OnesActivity", columns: OneActivity.columns, orderBy: "date ASC");
     List<OneActivity> Onesactivity = [];
     results?.forEach((result) {
       OneActivity One = OneActivity.fromMap(result);
@@ -49,9 +49,9 @@ class OneSQLiteDbProvider {
     print("après insert");
     var maxIdResult = await db?.rawQuery("SELECT MAX(idOne)+1 as last_inserted_id FROM OnesActivity");
     var id = maxIdResult?.first["last_inserted_id"];
-    try {var result = await db?.rawInsert("INSERT Into OnesActivity (idOne, aimglycemie, actglycemie, timebefore, timemeal, idAssociatedActivity)"
-        " VALUES (?, ?, ?, ?, ?, ?)",
-      [id, One.aimglycemie, One.actglycemie, One.timebefore, One.timemeal, One.idAssociatedActivity],
+    try {var result = await db?.rawInsert("INSERT Into OnesActivity (idOne, aimglycemie, actglycemie, timebefore, timemeal, idAssociatedActivity, date)"
+        " VALUES (?, ?, ?, ?, ?, ?, ?)",
+      [id, One.aimglycemie, One.actglycemie, One.timebefore, One.timemeal, One.idAssociatedActivity, One.date],
     );
     print("that's ok");
     return result;}

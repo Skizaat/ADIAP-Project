@@ -9,7 +9,8 @@ class OneActivity {
   final int timebefore;
   final int timemeal;
   final int idAssociatedActivity;
-  static final columns = ['idOne', 'aimglycemie', 'actglycemie', 'timebefore', 'timemeal', 'idAssociatedActivity'];
+  final String date;
+  static final columns = ['idOne', 'aimglycemie', 'actglycemie', 'timebefore', 'timemeal', 'idAssociatedActivity', 'date'];
 
   const OneActivity ({
     required this.idOne,
@@ -18,11 +19,12 @@ class OneActivity {
     required this.timebefore,
     required this.timemeal,
     required this.idAssociatedActivity,
+    required this.date,
 });
 
   factory OneActivity.fromMap(Map<dynamic, dynamic> data) {
     return OneActivity(
-      idOne: data["idOne"], aimglycemie: data['aimglycemie'], actglycemie: data['actglycemie'], timebefore: data['timebefore'], timemeal: data['timemeal'], idAssociatedActivity: data['idAssociatedActivity'],
+      idOne: data["idOne"], aimglycemie: data['aimglycemie'], actglycemie: data['actglycemie'], timebefore: data['timebefore'], timemeal: data['timemeal'], idAssociatedActivity: data['idAssociatedActivity'], date: data['date']
     );
   }
 
@@ -34,11 +36,12 @@ class OneActivity {
       'timebefore' : timebefore,
       'timemeal' : timemeal,
       'idAssociatedActivity': idAssociatedActivity,
+      'date' : date,
     };
   }
 
   @override
   String toString() {
-    return 'OneActivity{idOne: $idOne, aimglycemie: $aimglycemie, actglycemie: $actglycemie, timebefore: $timebefore, timemeal: $timemeal, idAssociatedActivity: $idAssociatedActivity}';
+    return 'OneActivity{idOne: $idOne, aimglycemie: $aimglycemie, actglycemie: $actglycemie, timebefore: $timebefore, timemeal: $timemeal, idAssociatedActivity: $idAssociatedActivity, date: $date}';
   }
 }

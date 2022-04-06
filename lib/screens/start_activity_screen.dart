@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:adiap/ActivityDatabase.dart';
 import 'package:flutter/material.dart';
 import 'package:adiap/Classes/activity.dart';
@@ -7,6 +9,7 @@ import 'package:adiap/routes.dart';
 import 'package:adiap/create_perso.dart';
 import 'package:adiap/OneActivityDatabase.dart';
 import 'package:adiap/Classes/OneActivity.dart';
+import 'package:intl/intl.dart';
 
 
 class StartActivityScaffold extends StatelessWidget {
@@ -78,7 +81,7 @@ class StartingFormState extends State<StartingForm> {
                 ], // Only numbers can be entered
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    value = '170';
+                    aimController.text = '170';
                     return null;
                   }
                   return null;
@@ -133,9 +136,10 @@ class StartingFormState extends State<StartingForm> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  OneActivity NewOne = OneActivity(idOne: 1, aimglycemie: int.parse(aimController.text), actglycemie: int.parse(glycemieController.text), timebefore: int.parse(beforeActController.text), timemeal: int.parse(mealController.text), idAssociatedActivity: startingActivity.idActivity);
+                  OneActivity NewOne = OneActivity(idOne: 1, aimglycemie: int.parse(aimController.text), actglycemie: int.parse(glycemieController.text), timebefore: int.parse(beforeActController.text), timemeal: int.parse(mealController.text), idAssociatedActivity: startingActivity.idActivity, date: DateFormat("yyyy-MM-dd").format(DateTime.now()));
                   //OneSQLiteDbProvider.db.insert(NewOne);
                   OneSQLiteDbProvider.db.getAllOnes();
+                  //OneSQLiteDbProvider.db.delete(5);
                   print(aimController.text);
                   print(glycemieController.text);
                   print(beforeActController.text);
