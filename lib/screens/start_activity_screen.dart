@@ -47,6 +47,11 @@ class StartingForm extends StatefulWidget {
 class StartingFormState extends State<StartingForm> {
 
   final _formKey = GlobalKey<FormState>();
+  TextEditingController aimController = TextEditingController();
+  TextEditingController glycemieController = TextEditingController();
+  TextEditingController beforeActController = TextEditingController();
+  TextEditingController mealController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context){
@@ -59,6 +64,7 @@ class StartingFormState extends State<StartingForm> {
           children: <Widget> [
                 Text("Entrez la valeur de Glycémie que vous souhaitez atteindre au début de votre séance de sport (par défaut la valeur est de 170 UNITE"),
                 TextFormField(
+                  controller: aimController,
                 onSaved: (value){aiming=value as int;},
                 decoration: const InputDecoration(labelText: "Glycémie visée"),
                 keyboardType: TextInputType.number,
@@ -70,6 +76,7 @@ class StartingFormState extends State<StartingForm> {
                 },
               ),
             TextFormField(
+              controller: glycemieController,
               onSaved: (value){aiming=value as int;},
               decoration: const InputDecoration(labelText: "Rentrez  votre glycémie actuelle"),
               keyboardType: TextInputType.number,
@@ -77,11 +84,15 @@ class StartingFormState extends State<StartingForm> {
                 FilteringTextInputFormatter.digitsOnly
               ], // Only numbers can be entered
               validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'rentrez les informations';
+                }
                 return null;
               },
             ),
             Text("Dans combien d'heures commencez vous votre activité physique ?"),
             TextFormField(
+              controller: beforeActController,
               onSaved: (value){aiming=value as int;},
               decoration: const InputDecoration(labelText: "Heures avant l'activité"),
               keyboardType: TextInputType.number,
@@ -89,11 +100,15 @@ class StartingFormState extends State<StartingForm> {
                 FilteringTextInputFormatter.digitsOnly
               ], // Only numbers can be entered
               validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'rentrez les informations';
+                }
                 return null;
               },
             ),
             Text("Combien d'heures séparent votre activité physique et votre repas le plus proche ?"),
             TextFormField(
+              controller: mealController,
               onSaved: (value){aiming=value as int;},
               decoration: const InputDecoration(labelText: "Repas le plus proche"),
               keyboardType: TextInputType.number,
@@ -101,9 +116,21 @@ class StartingFormState extends State<StartingForm> {
                 FilteringTextInputFormatter.digitsOnly
               ], // Only numbers can be entered
               validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'rentrez les informations';
+                }
                 return null;
               },
             ),
+            ElevatedButton(
+                onPressed: () {
+                  print(aimController.text);
+                  print(glycemieController.text);
+                  print(beforeActController.text);
+                  print(mealController.text);
+                },
+                child: Text('Valider')
+            )
           ],
         )
     );
