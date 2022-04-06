@@ -45,6 +45,7 @@ class OneActivityScaffold extends StatelessWidget {
                         child: ElevatedButton(
                           child: Text('Historique'),
                           onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => HistoricActivityRoute(concernedActivity: currentActivity)));
                           },
                         ),
                       ),

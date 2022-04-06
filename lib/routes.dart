@@ -8,6 +8,7 @@ import 'package:adiap/screens/knowledge_screen.dart';
 import 'package:adiap/screens/parameter_screen.dart';
 import 'package:adiap/screens/profile_screen.dart';
 import 'package:adiap/screens/start_activity_screen.dart';
+import 'package:adiap/screens/activity_historic.dart';
 
 class WelcomeRoute extends StatelessWidget {
   const WelcomeRoute({Key? key}) : super(key: key);
@@ -82,5 +83,16 @@ class StartActivityRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StartActivityScaffold(startingActivity: startingActivity,);
+  }
+}
+
+class HistoricActivityRoute extends StatelessWidget {
+  final Activity concernedActivity;
+
+  const HistoricActivityRoute({Key, key, required this.concernedActivity}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return HistoricActivityScaffold(concernedActivity: concernedActivity,);
   }
 }
