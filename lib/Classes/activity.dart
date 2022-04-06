@@ -54,9 +54,6 @@ class Activity {
   int getId() {
     return idActivity;
   }
-
-
-
 }
 
 
