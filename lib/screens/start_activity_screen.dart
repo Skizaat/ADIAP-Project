@@ -135,7 +135,7 @@ class StartingFormState extends State<StartingForm> {
               },
             ),
             ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     OneActivity NewOne = OneActivity(idOne: 1,
                         aimglycemie: int.parse(aimController.text),
@@ -144,13 +144,8 @@ class StartingFormState extends State<StartingForm> {
                         timemeal: int.parse(mealController.text),
                         idAssociatedActivity: startingActivity.idActivity,
                         date: DateFormat("yyyy-MM-dd").format(DateTime.now()));
-                    OneSQLiteDbProvider.db.insert(NewOne);
-                    OneSQLiteDbProvider.db.getAllOnes();
-                    //OneSQLiteDbProvider.db.delete(5);
-                    print(aimController.text);
-                    print(glycemieController.text);
-                    print(beforeActController.text);
-                    print(mealController.text);
+                    await OneSQLiteDbProvider.db.insert(NewOne);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HistoricActivityRoute(concernedActivity: startingActivity)));
                   }
                 },
                 child: Text('Valider')

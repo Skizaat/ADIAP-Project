@@ -111,7 +111,7 @@ class HistoricActivityScaffold extends StatelessWidget {
       child: Text('Vider l historique'),
       onPressed: () {
         OneSQLiteDbProvider.db.deleteByActivityId(activity.idActivity);
-        Navigator.push(context, MaterialPageRoute(builder: (context) => OneActivityRoute(currentActivity: activity)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const MainRoute()));
       },
     );
   }
