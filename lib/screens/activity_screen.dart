@@ -30,8 +30,9 @@ class ActivityScaffold extends StatelessWidget {
               } else if (snapshot.hasData) {
                 final data = snapshot.data as List<Activity>;
                 if (data.isEmpty) {
-                  return const Text("Vous n'avez pas d'activité d'enregistrée",
-                    style: TextStyle(fontSize: 18),);
+                  return const Center(
+                    child: Text("Vous n'avez pas d'activité d'enregistrée",
+                    style: TextStyle(fontSize: 18),));
                 } else {
                   return Scaffold(
                     body: ListView.builder(

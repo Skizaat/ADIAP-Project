@@ -13,7 +13,8 @@ import 'Classes/activity.dart';
 void main() {
   runApp(
     const MaterialApp(
-      title: 'My app', // used by the OS task switcher
+      title: 'My app',
+      debugShowCheckedModeBanner: false,// used by the OS task switcher
       home: WelcomeRoute(),
     ),
   );
