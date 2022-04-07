@@ -24,7 +24,7 @@ class HistoricActivityScaffold extends StatelessWidget {
             ),
           ),
           Expanded(
-                child: displayHistoricWidget(context, concernedActivity)),
+              child: displayHistoricWidget(context, concernedActivity)),
           SupprButton(context, concernedActivity),
         ],
       ),
@@ -34,73 +34,73 @@ class HistoricActivityScaffold extends StatelessWidget {
   Widget displayHistoricWidget(BuildContext context, Activity activity) {
     return Scaffold(
       body: FutureBuilder(
-          builder: (ctx, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text('${snapshot.error} occured',
-                    style: const TextStyle(fontSize: 18),
+        builder: (ctx, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              return Center(
+                child: Text('${snapshot.error} occured',
+                  style: const TextStyle(fontSize: 18),
+                ),
+              );
+            } else if (snapshot.hasData) {
+              final data = snapshot.data as List<OneActivity>;
+              if (data.isEmpty) {
+                return const Center(
+                    child: Text("Vous n'avez pas encore effectué d'enregistrements pour cette activité",
+                      style: TextStyle(fontSize: 18),)
+                );
+              } else {
+                return Scaffold(
+                  body: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: data.length,
+                      itemBuilder: (BuildContext context,
+                          int index) {
+                        String date = data[index].getdate();
+                        int startglycemie = data[index].getactglycemie();
+                        int aimglycemie = data[index].getaimglycemie();
+                        int timebefore = data[index].gettimebefore();
+                        String propositionAdiap = 'proposition';
+                        String endState = "Normal Glycémie";
+                        String comment = "comment";
+                        return SingleChildScrollView(
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white70,
+                                  border: Border.all(
+                                      color: Colors.black, width: 1)
+                              ),
+                              child: Column(
+                                children: [
+                                  Text("Séance du $date"),
+                                  Text(
+                                      "Glycémie $timebefore h avant la séance: $startglycemie mg/dL"),
+                                  Text(endState),
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    alignment: Alignment.bottomCenter,
+                                    child: Text(propositionAdiap),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    alignment: Alignment.bottomCenter,
+                                    child: Text(comment),
+                                  ),
+                                ],
+                              )
+                          ),
+                        );
+                      }
                   ),
                 );
-              } else if (snapshot.hasData) {
-                final data = snapshot.data as List<OneActivity>;
-                if (data.isEmpty) {
-                  return const Center(
-                      child: Text("Vous n'avez pas encore effectué d'enregistrements pour cette activité",
-                        style: TextStyle(fontSize: 18),)
-                  );
-                } else {
-                  return Scaffold(
-                    body: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemCount: data.length,
-                        itemBuilder: (BuildContext context,
-                            int index) {
-                          String date = data[index].getdate();
-                          int startglycemie = data[index].getactglycemie();
-                          int aimglycemie = data[index].getaimglycemie();
-                          int timebefore = data[index].gettimebefore();
-                          String propositionAdiap = 'proposition';
-                          String endState = "Normal Glycémie";
-                          String comment = "comment";
-                          return SingleChildScrollView(
-                            child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.white70,
-                                    border: Border.all(
-                                        color: Colors.black, width: 1)
-                                ),
-                                child: Column(
-                                  children: [
-                                    Text("Séance du $date"),
-                                    Text(
-                                        "Glycémie $timebefore h avant la séance: $startglycemie mg/dL"),
-                                    Text(endState),
-                                    Container(
-                                      padding: const EdgeInsets.all(10),
-                                      alignment: Alignment.bottomCenter,
-                                      child: Text(propositionAdiap),
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.all(10),
-                                      alignment: Alignment.bottomCenter,
-                                      child: Text(comment),
-                                    ),
-                                  ],
-                                )
-                            ),
-                          );
-                        }
-                    ),
-                  );
 
-                }
               }
             }
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          },
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
         future: OneSQLiteDbProvider.db.getbyIdAssociatedActivity(activity.idActivity),
       ),
     );

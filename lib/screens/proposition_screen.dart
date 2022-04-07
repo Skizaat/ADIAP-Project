@@ -1,5 +1,7 @@
 
-import 'package:adiap/proposition.dart';
+import 'package:adiap/Classes/Proposition.dart';
+import 'package:adiap/PropositionDatabase.dart';
+import 'package:adiap/proposition_functions.dart';
 import 'package:adiap/Classes/OneActivity.dart';
 import 'package:adiap/Classes/User.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +30,9 @@ class PropositionScaffold extends StatelessWidget {
             Text(giveproposition(user, oneActivity, activity)),
             ElevatedButton(
                 child: const Text("J'ai pris connaissance des propositions d'ADIAP"),
-                onPressed: () {
+                onPressed: () async {
+                  Proposition proposition = Proposition(idProposition: 1, idOneActivity: oneActivity.idOne, proposition: giveproposition(user, oneActivity, activity));
+                  await PropSQLiteDbProvider.db.insert(proposition);
                   Navigator.push(context, MaterialPageRoute(
                       builder: (context) => OneActivityRoute(currentActivity: activity,)));
                 }

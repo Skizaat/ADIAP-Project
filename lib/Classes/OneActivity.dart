@@ -1,7 +1,3 @@
-
-
-
-
 class OneActivity {
   final int idOne;
   final int aimglycemie;
