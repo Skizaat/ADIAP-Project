@@ -2,7 +2,7 @@ import 'package:adiap/Classes/User.dart';
 import 'package:flutter/material.dart';
 import 'package:adiap/routes.dart';
 import 'package:adiap/create_perso.dart';
-import 'package:adiap/file_handler.dart';
+import 'package:adiap/Databases/file_handler.dart';
 
 class WelcomeScaffold extends StatelessWidget {
   const WelcomeScaffold({Key? key}) : super(key: key);

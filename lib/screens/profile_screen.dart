@@ -1,6 +1,6 @@
 import 'package:adiap/Classes/User.dart';
 import 'package:flutter/material.dart';
-import 'package:adiap/file_handler.dart';
+import 'package:adiap/Databases/file_handler.dart';
 
 class ProfileScaffold extends StatelessWidget {
   const ProfileScaffold({Key? key}) : super(key: key);

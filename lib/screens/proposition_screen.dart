@@ -1,6 +1,6 @@
 
 import 'package:adiap/Classes/Proposition.dart';
-import 'package:adiap/PropositionDatabase.dart';
+import 'package:adiap/Databases/PropositionDatabase.dart';
 import 'package:adiap/proposition_functions.dart';
 import 'package:adiap/Classes/OneActivity.dart';
 import 'package:adiap/Classes/User.dart';

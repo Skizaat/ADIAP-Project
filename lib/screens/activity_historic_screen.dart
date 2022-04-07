@@ -1,4 +1,4 @@
-import 'package:adiap/OneActivityDatabase.dart';
+import 'package:adiap/Databases/OneActivityDatabase.dart';
 import 'package:flutter/material.dart';
 import 'package:adiap/Classes/activity.dart';
 import 'package:adiap/Classes/OneActivity.dart';

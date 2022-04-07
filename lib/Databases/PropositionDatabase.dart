@@ -4,7 +4,7 @@ import 'package:adiap/Classes/Proposition.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-import 'Classes/User.dart';
+import '../Classes/User.dart';
 
 
 class PropSQLiteDbProvider {
@@ -47,7 +47,7 @@ class PropSQLiteDbProvider {
   Future<Proposition> getById(int idOne) async {
     final db = await database;
     List<Map<String, Object?>>? results = await db?.query(
-        "Proposition", columns: Proposition.columns, where: "idProposition = ?", whereArgs: [idOne]);
+        "Proposition", columns: Proposition.columns, where: "idOne = ?", whereArgs: [idOne]);
     List<Proposition> AllProp = [];
     results?.forEach((result) {
       Proposition prop = Proposition.fromMap(result);

@@ -2,7 +2,7 @@ import 'package:adiap/Classes/activity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:adiap/routes.dart';
-import 'package:adiap/ActivityDatabase.dart';
+import 'package:adiap/Databases/ActivityDatabase.dart';
 
 
 

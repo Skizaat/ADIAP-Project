@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:adiap/ActivityDatabase.dart';
+import 'package:adiap/Databases/ActivityDatabase.dart';
 
 class KnowledgeScaffold extends StatelessWidget {
   const KnowledgeScaffold({Key? key}) : super(key: key);
