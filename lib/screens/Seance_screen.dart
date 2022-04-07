@@ -1,4 +1,5 @@
 import 'package:adiap/Classes/Proposition.dart';
+import 'package:adiap/Classes/Retours.dart';
 import 'package:adiap/Databases/OneActivityDatabase.dart';
 import 'package:adiap/Databases/PropositionDatabase.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,8 @@ import 'package:adiap/routes.dart';
 
 import 'package:adiap/Classes/OneActivity.dart';
 import 'package:adiap/Classes/activity.dart';
+
+import '../Databases/RetourDatabase.dart';
 
 class SeanceScaffold extends StatelessWidget {
   final OneActivity oneActivity;
@@ -37,7 +40,7 @@ class SeanceScaffold extends StatelessWidget {
                   Text("Glycémie visée: " + oneActivity.aimglycemie.toString() + " mg/dL\n"),
                   Text("Glycémie " + oneActivity.timebefore.toString() + " h avant le début de l'activité: " + oneActivity.actglycemie.toString() + "mg/dL\n\n"),
                   Container(
-                    height: 500,
+                    height: 200,
                     alignment: Alignment.bottomLeft,
                     child: FutureBuilder(
                         builder: (ctx, snapshot) {
@@ -66,7 +69,59 @@ class SeanceScaffold extends StatelessWidget {
                         future: PropSQLiteDbProvider.db.getById(oneActivity.idOne),
                     ),
                   ),
-                  Text("retour"),
+                  Container(
+                    height: 300,
+                    alignment: Alignment.bottomLeft,
+                    child: FutureBuilder(
+                      builder: (ctx, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.done) {
+                          if (snapshot.hasError) {
+                            return Center(
+                              child: Text('${snapshot.error} occured',
+                                style: const TextStyle(fontSize: 18),
+                              ),
+                            );
+                          } else if (snapshot.hasData) {
+                            final retour = snapshot.data as List<Retour>;
+                            if (retour.isEmpty) {
+                              print("dans le cas null");
+                              return Center(
+                                  child: Column(
+                                    children: [
+                                      const Center(
+                                        child: Text(
+                                          "Vous n'avez pas encore fait de retour sur la séance"),
+                                      ),
+                                      ElevatedButton(
+                                        child: const Text("Faire un retour"),
+                                        onPressed: () {
+                                          //Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityRoute()));
+                                        },
+                                      ),
+                                    ],
+                                  )
+                              );
+                            } else {
+                              return Scaffold(
+                                body: Text(
+                                    "Voici les retours que vous avez fait: \n\n" +
+                                        "Etat de la Glycémie après la séance: " +
+                                        retour[0].stateGly + "\n\n" +
+                                        "Commentaire personnel: " +
+                                        retour[0].commentary),
+                              );
+                            }
+                          }
+
+                        }
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      },
+                      future: RetourSQLiteDbProvider.db.getById(oneActivity.idOne),
+                    ),
+                  ),
                 ],
               ),
             ]

@@ -47,7 +47,7 @@ class PropSQLiteDbProvider {
   Future<Proposition> getById(int idOne) async {
     final db = await database;
     List<Map<String, Object?>>? results = await db?.query(
-        "Proposition", columns: Proposition.columns, where: "idOne = ?", whereArgs: [idOne]);
+        "Proposition", columns: Proposition.columns, where: "idOneActivity = ?", whereArgs: [idOne]);
     List<Proposition> AllProp = [];
     results?.forEach((result) {
       Proposition prop = Proposition.fromMap(result);

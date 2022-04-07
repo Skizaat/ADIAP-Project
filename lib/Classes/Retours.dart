@@ -3,7 +3,7 @@ class Retour {
   final int idOneActivity;
   final String stateGly;
   final String commentary;
-  static final columns = ['idRetour', 'idOneActivity', 'proposition', 'stateGly', "commentary"];
+  static final columns = ['idRetour', 'idOneActivity', 'stateGly', "commentary"];
 
   const Retour ({
     required this.idRetour,

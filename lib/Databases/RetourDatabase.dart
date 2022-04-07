@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:adiap/Classes/Proposition.dart';
 import 'package:adiap/Classes/Retours.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -35,7 +34,7 @@ class RetourSQLiteDbProvider {
   Future<List<Retour>> getAllOnes() async {
     final db = await database;
     List<Map<String, Object?>>? results = await db?.query(
-        "Retour", columns: Proposition.columns, orderBy: "idRetour ASC");
+        "Retour", columns: Retour.columns, orderBy: "idRetour ASC");
     List<Retour> AllRetour = [];
     results?.forEach((result) {
       Retour retour = Retour.fromMap(result);
@@ -44,16 +43,16 @@ class RetourSQLiteDbProvider {
     return AllRetour;
   }
 
-  Future<Retour> getById(int idOne) async {
+  Future<List<Retour>> getById(int idOne) async {
     final db = await database;
     List<Map<String, Object?>>? results = await db?.query(
-        "Retour", columns: Proposition.columns, where: "idOne = ?", whereArgs: [idOne]);
+        "Retour", columns: Retour.columns, where: "idOneActivity = ?", whereArgs: [idOne]);
     List<Retour> AllRetour = [];
     results?.forEach((result) {
       Retour retour = Retour.fromMap(result);
       AllRetour.add(retour);
     });
-    return AllRetour[0];
+    return AllRetour;
   }
 
   insert(Retour retour) async {
