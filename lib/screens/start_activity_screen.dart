@@ -90,7 +90,7 @@ class StartingFormState extends State<StartingForm> {
             TextFormField(
               controller: glycemieController,
               onSaved: (value){aiming=value as int;},
-              decoration: const InputDecoration(labelText: "Rentrez  votre glycémie actuelle"),
+              decoration: const InputDecoration(labelText: "Rentrez  votre glycémie actuelle en mg/dL"),
               keyboardType: TextInputType.number,
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.digitsOnly

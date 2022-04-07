@@ -74,7 +74,7 @@ class HistoricActivityScaffold extends StatelessWidget {
                                   children: [
                                     Text("Séance du $date"),
                                     Text(
-                                        "Glycémie $timebefore h avant la séance: $startglycemie UNITE"),
+                                        "Glycémie $timebefore h avant la séance: $startglycemie mg/dL"),
                                     Text(endState),
                                     Container(
                                       padding: const EdgeInsets.all(10),
