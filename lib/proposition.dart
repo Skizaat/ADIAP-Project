@@ -1,5 +1,6 @@
 import 'package:adiap/Classes/OneActivity.dart';
 import 'package:adiap/Classes/User.dart';
+import 'package:flutter/material.dart';
 import 'Classes/activity.dart';
 
 String giveproposition(User user, OneActivity oneActivity, Activity activity) {
@@ -20,12 +21,14 @@ String giveproposition(User user, OneActivity oneActivity, Activity activity) {
   }
   if (user.diabTreatment == "Multi injection d insulines") {
     if (oneActivity.timemeal > 2) {
+      print("je suis là");
       proposition += injectionLoinRepas(activity.intensity);
     }
     if (oneActivity.timemeal <= 2) {
       proposition += injectionProcheRepas(activity.intensity);
     }
     else {
+      print("et aussi là");
       return "Il y a eu un problème (injection)";
     }
   }

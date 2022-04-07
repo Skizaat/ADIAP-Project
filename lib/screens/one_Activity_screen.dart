@@ -20,7 +20,6 @@ class OneActivityScaffold extends StatelessWidget {
           //width: 200,
           padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
-              color: Colors.white,
               border: Border.all(color: Colors.black, width: 1)
           ),
           child: Column(

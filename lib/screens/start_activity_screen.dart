@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:adiap/ActivityDatabase.dart';
+import 'package:adiap/Classes/User.dart';
+import 'package:adiap/file_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:adiap/Classes/activity.dart';
 import "package:shared_preferences/shared_preferences.dart";
@@ -145,10 +147,11 @@ class StartingFormState extends State<StartingForm> {
                         idAssociatedActivity: startingActivity.idActivity,
                         date: DateFormat("yyyy-MM-dd").format(DateTime.now()));
                     await OneSQLiteDbProvider.db.insert(NewOne);
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HistoricActivityRoute(concernedActivity: startingActivity)));
+                    final user = await UserSQLiteDbProvider.db.getAllOnes();
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => PropositionRoute(activity: startingActivity,oneActivity: NewOne, user: user[0],)));
                   }
                 },
-                child: Text('Valider')
+                child: Text('Voir ce que vous propose ADIAP')
             )
           ],
         )

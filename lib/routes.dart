@@ -1,6 +1,9 @@
+import 'package:adiap/Classes/OneActivity.dart';
+import 'package:adiap/Classes/User.dart';
 import 'package:adiap/Classes/activity.dart';
 import 'package:adiap/screens/activity_screen.dart';
 import 'package:adiap/screens/one_Activity_screen.dart';
+import 'package:adiap/screens/proposition_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:adiap/screens/welcome_screen.dart';
 import 'package:adiap/screens/main_screen.dart';
@@ -10,6 +13,8 @@ import 'package:adiap/screens/profile_screen.dart';
 import 'package:adiap/screens/start_activity_screen.dart';
 import 'package:adiap/screens/activity_historic_screen.dart';
 import 'package:adiap/create_perso.dart';
+
+import 'Classes/activity.dart';
 
 class WelcomeRoute extends StatelessWidget {
   const WelcomeRoute({Key? key}) : super(key: key);
@@ -105,5 +110,17 @@ class UserFormRoute extends StatelessWidget{
   Widget build(BuildContext context) {
     return const CreateUserScaffold();
   }
+}
 
+class PropositionRoute extends StatelessWidget {
+  final Activity activity;
+  final OneActivity oneActivity;
+  final User user;
+
+  const PropositionRoute({Key, key, required this.activity, required this.oneActivity, required this.user}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return PropositionScaffold(activity: activity, oneActivity: oneActivity, user: user);
+  }
 }
