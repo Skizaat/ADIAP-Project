@@ -1,6 +1,7 @@
 import 'package:adiap/Classes/OneActivity.dart';
 import 'package:adiap/Classes/User.dart';
 import 'package:adiap/Classes/activity.dart';
+import 'package:adiap/screens/Seance_screen.dart';
 import 'package:adiap/screens/activity_screen.dart';
 import 'package:adiap/screens/one_Activity_screen.dart';
 import 'package:adiap/screens/proposition_screen.dart';
@@ -122,5 +123,16 @@ class PropositionRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropositionScaffold(activity: activity, oneActivity: oneActivity, user: user);
+  }
+}
+
+class SeanceRoute extends StatelessWidget {
+  final OneActivity oneActivity;
+
+  const SeanceRoute({Key, key, required this.oneActivity}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SeanceScaffold(oneActivity: oneActivity);
   }
 }

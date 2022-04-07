@@ -57,37 +57,23 @@ class HistoricActivityScaffold extends StatelessWidget {
                       itemBuilder: (BuildContext context,
                           int index) {
                         String date = data[index].getdate();
-                        int startglycemie = data[index].getactglycemie();
-                        int aimglycemie = data[index].getaimglycemie();
-                        int timebefore = data[index].gettimebefore();
-                        String propositionAdiap = 'proposition';
-                        String endState = "Normal Glycémie";
-                        String comment = "comment";
                         return SingleChildScrollView(
-                          child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.white70,
-                                  border: Border.all(
-                                      color: Colors.black, width: 1)
-                              ),
-                              child: Column(
-                                children: [
-                                  Text("Séance du $date"),
-                                  Text(
-                                      "Glycémie $timebefore h avant la séance: $startglycemie mg/dL"),
-                                  Text(endState),
-                                  Container(
-                                    padding: const EdgeInsets.all(10),
-                                    alignment: Alignment.bottomCenter,
-                                    child: Text(propositionAdiap),
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.all(10),
-                                    alignment: Alignment.bottomCenter,
-                                    child: Text(comment),
-                                  ),
-                                ],
-                              )
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => SeanceRoute(oneActivity: data[index])));
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              height: 40,
+                                decoration: BoxDecoration(
+                                    color: Colors.white70,
+                                    border: Border.all(
+                                        color: Colors.black, width: 1)
+                                ),
+                                child: Text("Séance du $date"),
+
+                            ),
                           ),
                         );
                       }
