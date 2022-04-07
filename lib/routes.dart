@@ -8,7 +8,7 @@ import 'package:adiap/screens/knowledge_screen.dart';
 import 'package:adiap/screens/parameter_screen.dart';
 import 'package:adiap/screens/profile_screen.dart';
 import 'package:adiap/screens/start_activity_screen.dart';
-import 'package:adiap/screens/activity_historic.dart';
+import 'package:adiap/screens/activity_historic_screen.dart';
 import 'package:adiap/create_perso.dart';
 
 class WelcomeRoute extends StatelessWidget {

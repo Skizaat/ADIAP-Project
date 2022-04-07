@@ -1,3 +1,5 @@
+import 'package:adiap/Classes/User.dart';
+import 'package:adiap/file_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import "package:shared_preferences/shared_preferences.dart";
@@ -11,8 +13,8 @@ class CreateUserScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: const MyCustomForm(),
+    return const Scaffold(
+        body: MyCustomForm(),
       );
   }
 }
@@ -41,6 +43,10 @@ class MyCustomFormState extends State<MyCustomForm> {
   // Note: This is a GlobalKey<FormState>,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController weightController = TextEditingController();
+
+
   DiabTreatment _trt = DiabTreatment.multi_inj;
   @override
 
@@ -54,6 +60,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextFormField(
+                controller: nameController,
                 decoration: const InputDecoration(labelText: "Prénom"),
                 onSaved: (value) {
                   name = value;
@@ -67,6 +74,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 },
               ),
               TextFormField(
+                controller: weightController,
                 onSaved: (value) {
                   weight = value as int;
                 },
@@ -83,6 +91,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   return null;
                 },
               ),
+              Text("Indiquez votre type de traitement",),
               ListTile(
                 title: const Text('Pompe à insuline'),
                 leading: Radio(
@@ -113,7 +122,20 @@ class MyCustomFormState extends State<MyCustomForm> {
               ),
               ElevatedButton(
                   onPressed: () async {
-                    if (_formKey.currentState!.validate()) {}
+                    if (_formKey.currentState!.validate()) {
+                      print(_trt);
+                      String treatment;
+                      if (_trt == DiabTreatment.insu_pump) {
+                        treatment = "Pompe à insuline";
+                      } else {
+                        treatment = "Multi injection d insulines";
+                      }
+
+                      User user = User(id: 1, name: nameController.text, weight: int.parse(weightController.text), diabTreatment: treatment);
+                      await UserSQLiteDbProvider.db.insert(user);
+                      await UserSQLiteDbProvider.db.getAllOnes();
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const MainRoute()));
+                    }
                     /*if (_formKey.currentState!.validate()) {
                       OneActivity NewOne = OneActivity(idOne: 1,
                           aimglycemie: int.parse(aimController.text),
@@ -126,7 +148,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => HistoricActivityRoute(concernedActivity: startingActivity)));
                     }*/
                   },
-                  child: Text("Valider")
+                  child: const Text("Valider")
               )
             ]
         )

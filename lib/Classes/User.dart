@@ -11,7 +11,7 @@ class User{
   final int id;
   final String name;
   final int weight;
-  final int diabTreatment;
+  final String diabTreatment;
   static final columns = ['id', 'name', 'weight', 'diabTreatment'];
 
   factory User.fromMap(Map<dynamic, dynamic> data) {

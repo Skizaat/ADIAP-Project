@@ -26,7 +26,7 @@ class UserSQLiteDbProvider {
         path,
         version: 1,
         onCreate: (Database db, int version) async {
-          await db.execute("CREATE TABLE User(id INTEGER PRIMARY KEY, name TEXT, weight TEXT, diabTreatment INTEGER)");
+          await db.execute("CREATE TABLE User(id INTEGER PRIMARY KEY, name TEXT, weight INT, diabTreatment TEXT)");
         });
   }
 
@@ -39,13 +39,13 @@ class UserSQLiteDbProvider {
       User OneU = User.fromMap(result);
       AllUser.add(OneU);
     });
-    print(AllUser);
+    print(results);
     return AllUser;
   }
 
   insert(User user) async {
     final db = await database;
-    var maxIdResult = await db?.rawQuery("SELECT MAX(idOne)+1 as last_inserted_id FROM OnesActivity");
+    var maxIdResult = await db?.rawQuery("SELECT MAX(id)+1 as last_inserted_id FROM User");
     var id = maxIdResult?.first["last_inserted_id"];
     var result = await db?.rawInsert("INSERT Into User (id, name, weight, diabTreatment)"
         " VALUES (?, ?, ?, ?)",
