@@ -2,6 +2,7 @@ import 'package:adiap/Classes/OneActivity.dart';
 import 'package:adiap/Classes/User.dart';
 import 'package:adiap/Classes/activity.dart';
 import 'package:adiap/screens/activity_screen.dart';
+import 'package:adiap/screens/create_activity.dart';
 import 'package:adiap/screens/one_Activity_screen.dart';
 import 'package:adiap/screens/proposition_screen.dart';
 import 'package:flutter/material.dart';
@@ -122,5 +123,14 @@ class PropositionRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropositionScaffold(activity: activity, oneActivity: oneActivity, user: user);
+  }
+}
+
+class CreateActivityRoute extends StatelessWidget {
+  const CreateActivityRoute({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const CreateActivityScaffold();
   }
 }

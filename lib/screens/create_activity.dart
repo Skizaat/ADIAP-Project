@@ -1,8 +1,12 @@
 import 'dart:io';
 
+import 'package:adiap/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:adiap/Classes/activity.dart';
+import 'package:flutter/services.dart';
 import 'package:weekday_selector/weekday_selector.dart';
+
+import '../ActivityDatabase.dart';
 
 class CreateActivityScaffold extends StatelessWidget {
 
@@ -37,7 +41,9 @@ class CreateFormState extends State<CreateForm> {
   @override
   Widget build(BuildContext context){
     String? typeActivite;
-    String actIntensite = "légère";
+    String actIntensite = "Légère";
+    String weekday="Lundi";
+    int? time;
     return Form(
       key: _formKey,
       child: Flex(
@@ -45,19 +51,19 @@ class CreateFormState extends State<CreateForm> {
         direction: Axis.vertical,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget> [
-        TextFormField(
-        controller: activiteController,
-        decoration: const InputDecoration(labelText: "Nom de l'activite"),
-        onSaved: (value) {
-          typeActivite = value;
-        },
+          TextFormField(
+            controller: activiteController,
+            decoration: const InputDecoration(labelText: "Nom de l'activite"),
+            onSaved: (value) {
+              typeActivite = value;
+          },
         // The validator receives the text that the user has entered.
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return "Entrez le nom de l'activite";
-          }
-          return null;
-        },
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "Entrez le nom de l'activite";
+            }
+            return null;
+          },
       ),
       Text("Entrer l'intenstié de l'activité que vous faites"),
       DropdownButton<String>(
@@ -74,7 +80,7 @@ class CreateFormState extends State<CreateForm> {
             actIntensite = newValue!;
           });
         },
-        items: <String>['légère','modérée','intense']
+        items: <String>['Légère','Modérée','Intense']
             .map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
@@ -83,53 +89,63 @@ class CreateFormState extends State<CreateForm> {
         }).toList(),
       ),
 
-      WeekdaySelector(
-        onChanged: (int day) {
+      DropdownButton<String>(
+        value: weekday,
+        icon: const Icon(Icons.arrow_downward),
+        elevation: 16,
+        style: const TextStyle(color: Colors.blue),
+        underline: Container(
+          height: 2,
+          color: Colors.blue,
+        ),
+        onChanged: (String? newValue) {
           setState(() {
-            // Set all values to false except the "day"th element
-            values = List.filled(7, false, growable: false)..[day % 7] = true;
+            weekday = newValue!;
           });
         },
-        values: values,
-      );
+        items: <String>["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
+            .map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+      ),
       TextFormField(
-      controller: timeController,
-      onSaved: (value) {
-        weight = value as int;
-      },
-      decoration: const InputDecoration(labelText: "Heure"),
-      keyboardType: TextInputType.number,
-      inputFormatters: <TextInputFormatter>[
-        FilteringTextInputFormatter.digitsOnly
-      ],
-      // Only numbers can be entered
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return "Entrez l'heure de l'activite (ex 16 pour 16h)";
-        }
-        return null;
-      },
-    ),
-    ElevatedButton(
-              onPressed: () async {
-    if (_formKey.currentState!.validate()) {
-    String dayname;
-    List<String> weekdays=["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"];
-    dayname=weekdays[day-1];
-    Activity newActivity = Activity(idActivity: 1,
-    nameActivity: activiteController.text,
-    intensite: actIntensite,
-    day:dayname,
-    hour: int.parse(timeController.text),
-    await OneSQLiteDbProvider.db.insert(newActivity);
-    final user = await UserSQLiteDbProvider.db.getAllOnes();
-    Navigator.push(context, MaterialPageRoute(builder: (context) => PropositionRoute(activity: createActivity,activity: newActivity, user: user[0],)));
-    )
-    },
-    child: Text('Voir ce que vous propose ADIAP')
-    }
+        controller: timeController,
+        onSaved: (value) {
+          time = value as int;
+        },
+        decoration: const InputDecoration(labelText: "Heure"),
+        keyboardType: TextInputType.number,
+        inputFormatters: <TextInputFormatter>[
+          FilteringTextInputFormatter.digitsOnly
         ],
-      )
+        // Only numbers can be entered
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return "Entrez l'heure de l'activite (ex 16 pour 16h)";
+          }
+          return null;
+        },
+      ),
+      ElevatedButton(
+        onPressed: () async {
+          if (_formKey.currentState!.validate()) {
+            Activity newActivity = Activity(idActivity: 1,
+              nameActivity: activiteController.text,
+              intensity: actIntensite,
+              day: weekday,
+              hour: int.parse(timeController.text),);
+            await SQLiteDbProvider.db.insert(newActivity);
+            Navigator.push(context, MaterialPageRoute(
+                builder: (context) => OneActivityRoute(currentActivity: newActivity,)));
+          }
+        },
+        child: Text('Enregistrer'),
+      ),
+    ],
+    )
     );
   }
 }
