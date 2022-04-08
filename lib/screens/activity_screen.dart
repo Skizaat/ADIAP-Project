@@ -17,8 +17,8 @@ class ActivityScaffold extends StatelessWidget {
   Widget displayActivityWidget(BuildContext context) {
     return Scaffold(
       body: SizedBox(
-          width: 300,
-          height: 100,
+          //width: 300,
+          //height: 100,
           child: FutureBuilder(
             builder: (ctx, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {

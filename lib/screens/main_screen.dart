@@ -159,10 +159,10 @@ class MainScaffold extends StatelessWidget {
                   child: const Text("Créez une activité"),
                   onPressed: () async {
                     //Activity Tennis = new Activity(idActivity: 2, nameActivity: "Tennis", intensity: "Légère", day: "Mardi", hour: 14);
-                    Activity Hanball = new Activity(idActivity: 3, nameActivity: "Hanball", intensity: "Légère", day: "Mercredi", hour: 17);
+                    Activity Folie = new Activity(idActivity: 3, nameActivity: "FolieModéréee", intensity: "Modérée", day: "Mercredi", hour: 1);
                     //SQLiteDbProvider.db.insert(Tennis);
-                    await SQLiteDbProvider.db.insert(Hanball);
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityRoute()));
+                    await SQLiteDbProvider.db.insert(Folie);
+                     await Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityRoute()));
                   },
               ),
             ],

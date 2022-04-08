@@ -6,17 +6,14 @@ import 'Classes/activity.dart';
 String giveproposition(User user, OneActivity oneActivity, Activity activity) {
   String proposition = "";
   print("Gonna start thinking about a proposition");
-  print("Gly visée");
-  print(oneActivity.aimglycemie);
-  print("Gly actuelle");
-  print(oneActivity.actglycemie);
-  print(oneActivity.aimglycemie < oneActivity.actglycemie);
+
   if (oneActivity.actglycemie < oneActivity.aimglycemie){
     print("Il y a besoin d'un resucrage");
     proposition += propositionResucrage(oneActivity.aimglycemie, oneActivity.actglycemie, user.weight);
   }
   if (user.diabTreatment == "Pompe à insuline") {
     print("Je suis dans le cas Pompe à insuline");
+    print(oneActivity.timemeal);
     if (oneActivity.timemeal > 2) {
       print("je suis dans le cas loin d'un repas");
       proposition += pompeLoinRepas(activity.intensity);
@@ -46,7 +43,7 @@ String giveproposition(User user, OneActivity oneActivity, Activity activity) {
   //else {
     //proposition += "Il y a eu un problème (user treatment)";
   //}
-  proposition += "Si votre activité physique dure plus d'une heure, pensez à prendre une collation de 15 à 20 g de glucides par heure\n";
+  proposition += "\nSi votre activité physique dure plus d'une heure, pensez à prendre une collation de 15 à 20 g de glucides par heure\n";
   print("finishthinking");
   return proposition;
 }
