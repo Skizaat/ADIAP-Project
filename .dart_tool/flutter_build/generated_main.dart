@@ -5,10 +5,10 @@
 
 // @dart = 2.16
 
-// When `package:adiap/create_perso.dart` defines `main`, that definition is shadowed by the definition below.
-export 'package:adiap/create_perso.dart';
+// When `package:adiap/main.dart` defines `main`, that definition is shadowed by the definition below.
+export 'package:adiap/main.dart';
 
-import 'package:adiap/create_perso.dart' as entrypoint;
+import 'package:adiap/main.dart' as entrypoint;
 import 'dart:io'; // flutter_ignore: dart_io_import.
 import 'package:path_provider_android/path_provider_android.dart';
 import 'package:shared_preferences_android/shared_preferences_android.dart';
