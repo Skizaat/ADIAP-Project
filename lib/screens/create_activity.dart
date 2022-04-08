@@ -1,17 +1,7 @@
 import 'dart:io';
 
-import 'package:adiap/ActivityDatabase.dart';
-import 'package:adiap/Classes/User.dart';
-import 'package:adiap/file_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:adiap/Classes/activity.dart';
-import "package:shared_preferences/shared_preferences.dart";
-import "package:flutter/services.dart";
-import 'package:adiap/routes.dart';
-import 'package:adiap/create_perso.dart';
-import 'package:adiap/OneActivityDatabase.dart';
-import 'package:adiap/Classes/OneActivity.dart';
-import 'package:intl/intl.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 
 class CreateActivityScaffold extends StatelessWidget {
