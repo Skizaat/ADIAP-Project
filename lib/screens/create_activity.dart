@@ -4,9 +4,8 @@ import 'package:adiap/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:adiap/Classes/activity.dart';
 import 'package:flutter/services.dart';
-import 'package:weekday_selector/weekday_selector.dart';
 
-import '../ActivityDatabase.dart';
+import 'package:adiap/Databases/ActivityDatabase.dart';
 
 class CreateActivityScaffold extends StatelessWidget {
 
@@ -37,12 +36,12 @@ class CreateFormState extends State<CreateForm> {
   TextEditingController intensite = TextEditingController();
   TextEditingController timeController = TextEditingController();
   List<bool> values = List.filled(7, false);
+  String actIntensite = "Légère";
+  String weekday="Lundi";
 
   @override
   Widget build(BuildContext context){
     String? typeActivite;
-    String actIntensite = "Légère";
-    String weekday="Lundi";
     int? time;
     return Form(
       key: _formKey,

@@ -40,7 +40,7 @@ class SeanceScaffold extends StatelessWidget {
                   Text("Glycémie visée: " + oneActivity.aimglycemie.toString() + " mg/dL\n"),
                   Text("Glycémie " + oneActivity.timebefore.toString() + " h avant le début de l'activité: " + oneActivity.actglycemie.toString() + "mg/dL\n\n"),
                   Container(
-                    height: 200,
+                    height: 300,
                     alignment: Alignment.bottomLeft,
                     child: FutureBuilder(
                         builder: (ctx, snapshot) {

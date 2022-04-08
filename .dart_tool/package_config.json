@@ -386,12 +386,6 @@
       "languageVersion": "2.1"
     },
     {
-      "name": "weekday_selector",
-      "rootUri": "file:///C:/Users/flute/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/weekday_selector-1.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "win32",
       "rootUri": "file:///C:/Users/flute/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/win32-2.5.1",
       "packageUri": "lib/",
@@ -410,7 +404,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-04-08T01:12:01.928788Z",
+  "generated": "2022-04-08T01:52:51.325856Z",
   "generator": "pub",
   "generatorVersion": "2.16.0"
 }
