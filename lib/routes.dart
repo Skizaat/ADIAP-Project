@@ -5,6 +5,7 @@ import 'package:adiap/screens/Seance_screen.dart';
 import 'package:adiap/screens/activity_screen.dart';
 import 'package:adiap/screens/one_Activity_screen.dart';
 import 'package:adiap/screens/proposition_screen.dart';
+import 'package:adiap/screens/retour_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:adiap/screens/welcome_screen.dart';
 import 'package:adiap/screens/main_screen.dart';
@@ -134,5 +135,16 @@ class SeanceRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SeanceScaffold(oneActivity: oneActivity);
+  }
+}
+
+class RetourRoute extends StatelessWidget {
+  final OneActivity oneActivity;
+
+  const RetourRoute({Key, key, required this.oneActivity}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RetourScaffold(oneActivity: oneActivity);
   }
 }

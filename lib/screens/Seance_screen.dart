@@ -96,7 +96,7 @@ class SeanceScaffold extends StatelessWidget {
                                       ElevatedButton(
                                         child: const Text("Faire un retour"),
                                         onPressed: () {
-                                          //Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityRoute()));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => RetourRoute(oneActivity: oneActivity)));
                                         },
                                       ),
                                     ],
