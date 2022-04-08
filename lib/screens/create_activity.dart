@@ -5,31 +5,28 @@ import 'package:adiap/Classes/activity.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 
 class CreateActivityScaffold extends StatelessWidget {
-  final Activity createActivity;
 
-  const CreateActivityScaffold({Key, key, required this.createActivity,}) : super(key: key);
+  const CreateActivityScaffold({Key, key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: CreateForm(createActivity: createActivity),
+      body: CreateForm(),
     );
   }
 }
 
 class CreateForm extends StatefulWidget {
-  final Activity createActivity;
-  const CreateForm({Key? key, required this.createActivity}) : super(key: key);
+  const CreateForm({Key? key}) : super(key: key);
 
   @override
   CreateFormState createState() {
-    return CreateFormState(createActivity: createActivity);
+    return CreateFormState();
   }
 }
 
 class CreateFormState extends State<CreateForm> {
-  final Activity createActivity;
-  CreateFormState({Key? key, required this.createActivity});
+  CreateFormState({Key? key});
 
   final _formKey = GlobalKey<FormState>();
   TextEditingController activiteController = TextEditingController();
