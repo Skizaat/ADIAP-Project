@@ -37,7 +37,7 @@ class PropositionScaffold extends StatelessWidget {
                       builder: (context) => OneActivityRoute(currentActivity: activity,)));
                 }
             ),
-            Text("Toutes les propositions d'ADIAP sont retrouvables dans l'historique de l'activité"),
+            Text("Toutes les propositions d'ADIAP sont retrouvables dans l'historique de l'activité, dans la séance correspondante"),
           ],
         ),
       ),
