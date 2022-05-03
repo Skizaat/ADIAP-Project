@@ -7,6 +7,8 @@ import 'package:flutter/services.dart';
 
 import 'package:adiap/Databases/ActivityDatabase.dart';
 
+import '../theme/custom_theme.dart';
+
 class CreateActivityScaffold extends StatelessWidget {
 
   const CreateActivityScaffold({Key, key}) : super(key: key);
@@ -21,7 +23,6 @@ class CreateActivityScaffold extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Container(
           padding: const EdgeInsets.fromLTRB(20, 0, 10, 20),
-          color:  const Color(0xffdaebe5),
           child: const CreateForm() //Text
         ), //Container
       ),
@@ -84,10 +85,10 @@ class CreateFormState extends State<CreateForm> {
           value: actIntensite,
           icon: const Icon(Icons.arrow_downward),
           elevation: 16,
-          style: const TextStyle(color: Colors.blue),
+          style: const TextStyle(color: Color(0xff1665a0)),
           underline: Container(
             height: 2,
-            color: Colors.blue,
+            color: Color(0xff1665a0),
           ),
           onChanged: (String? newValue) {
             setState(() {
@@ -107,10 +108,10 @@ class CreateFormState extends State<CreateForm> {
           value: weekday,
           icon: const Icon(Icons.arrow_downward),
           elevation: 16,
-          style: const TextStyle(color: Colors.blue),
+          style: const TextStyle(color: Color(0xff1665a0)),
           underline: Container(
             height: 2,
-            color: Colors.blue,
+            color: Color(0xff1665a0),
           ),
           onChanged: (String? newValue) {
             setState(() {
