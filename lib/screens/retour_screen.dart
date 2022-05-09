@@ -25,6 +25,9 @@ class RetourScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Vos retours'),
+      ),
       resizeToAvoidBottomInset : false,
       body: Column(
           children: [

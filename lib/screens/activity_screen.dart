@@ -11,7 +11,18 @@ class ActivityScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // Material is a conceptual piece
     // of paper on which the UI appears.
-    return displayActivityWidget(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Créer une activité'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Container(
+            padding: const EdgeInsets.fromLTRB(20, 0, 10, 20),
+            child: displayActivityWidget(context) //Text
+        ), //Container
+      ),
+    );
   }
 
   Widget displayActivityWidget(BuildContext context) {

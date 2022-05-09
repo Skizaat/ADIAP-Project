@@ -11,8 +11,10 @@ class WelcomeScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // Material is a conceptual piece
     // of paper on which the UI appears.
-
       return Scaffold(
+        appBar: AppBar(
+          title: const Text('ADIAP'),
+        ),
         // Column is a vertical, linear layout.
           body: FutureBuilder(
             builder: (ctx, snapshot) {

@@ -14,6 +14,9 @@ class HistoricActivityScaffold extends StatelessWidget {
     // Material is a conceptual piece
     // of paper on which the UI appears.
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Créer une activité'),
+      ),
       body: Flex(
         direction: Axis.vertical,
         children: [

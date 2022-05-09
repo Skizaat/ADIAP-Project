@@ -23,6 +23,9 @@ class SeanceScaffold extends StatelessWidget {
     // Material is a conceptual piece
     // of paper on which the UI appears.
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Vos séances'),
+      ),
       body: Container(
         margin: EdgeInsets.all(20),
         //height: 100,
