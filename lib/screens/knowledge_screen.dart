@@ -16,13 +16,49 @@ class KnowledgeScaffold extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Container(
           padding: const EdgeInsets.fromLTRB(20, 0, 10, 20),
-          child: Center(
-            child: ElevatedButton(
-              child: const Text("suppr"),
-              onPressed: () {
-                SQLiteDbProvider.db.delete(8);
-              },
-            ),
+          child: Column(
+            children: [
+              GestureDetector(
+                onTap: () {},
+                child: Text('Activité physique et diabète'),
+                ),
+              GestureDetector(
+                onTap: () {},
+                child: Text('Adaptations des doses d’insulines pour l’activité physique'),
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Text('Physiologie du corps à l’activité physique', style: TextStyle(fontStyle: FontStyle.italic)),
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Text('Alimentation et sport'),
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Text('Collation préventive et resucrage durant une activité physique'),
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Text('Activité physique et hypoglycémie'),
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Text('Activité physique et hyperglycémie'),
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Text('Objectif glycémique pour débuter une activité physique'),
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Text('Activité physique et intensité : quesaco ?'),
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Text('Surveillance glycémique lors de mon activité physique'),
+              ),
+            ],
           ),
         ), //Container
       ),
