@@ -22,6 +22,9 @@ class StartActivityScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Débuter une activité'),
+      ),
       resizeToAvoidBottomInset : false,
         body: Column(
               children: [

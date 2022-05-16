@@ -21,6 +21,9 @@ class PropositionScaffold extends StatelessWidget {
     // Material is a conceptual piece
     // of paper on which the UI appears.
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Propositions'),
+      ),
       body: Container(
         padding: EdgeInsets.fromLTRB(30, 100, 30, 0),
         height: 500,

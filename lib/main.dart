@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:adiap/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -12,8 +13,9 @@ import 'Classes/activity.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
-      title: 'My app',
+    MaterialApp(
+      title: 'Adiap',
+      theme: CustomTheme.lightTheme,
       debugShowCheckedModeBanner: false,// used by the OS task switcher
       home: WelcomeRoute(),
     ),

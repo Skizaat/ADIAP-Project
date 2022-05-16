@@ -7,9 +7,17 @@ class ParameterScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // Material is a conceptual piece
     // of paper on which the UI appears.
-    return const Material(
-      child: Center(
-        child: Text("Paramètres"),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Paramètres'),
+      ),
+      body: const Padding(
+        padding: EdgeInsets.all(20),
+        child: Material(
+          child: Center(
+            child: Text("Paramètres"),
+          ), //Text
+        ), //Container
       ),
     );
   }

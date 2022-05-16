@@ -10,6 +10,9 @@ class ProfileScaffold extends StatelessWidget {
     // Material is a conceptual piece
     // of paper on which the UI appears.
     return Scaffold (
+      appBar: AppBar(
+        title: const Text('Profil'),
+      ),
       body: Flex (
         direction: Axis.vertical,
         children: [
