@@ -75,7 +75,7 @@ class StartingFormState extends State<StartingForm> {
           direction: Axis.vertical,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget> [
-                Text("Entrez la valeur de Glycémie que vous souhaitez atteindre au début de votre séance de sport (par défaut la valeur est de 170 UNITE"),
+                Text("Entrez la valeur de Glycémie que vous souhaitez atteindre au début de votre séance de sport (par défaut la valeur est de 170 mg/dL"),
                 TextFormField(
                   controller: aimController,
                 onSaved: (value){aiming=value as int;},

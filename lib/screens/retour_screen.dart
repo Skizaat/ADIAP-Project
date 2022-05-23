@@ -78,11 +78,15 @@ class RetourFormState extends State<RetourForm> {
             Text("Entrez l'état de votre glycémie à la fin de la séance"),
             TextFormField(
               controller: stateController,
-              decoration: const InputDecoration(labelText: "Par exemple: Hypoglycémie"),
-              // The validator receives the text that the user has entered.
+              onSaved: (value){aiming=value as int;},
+              decoration: const InputDecoration(labelText: "Rentrez  votre glycémie à la fin de la séance en mg/dL"),
+              keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.digitsOnly
+              ], // Only numbers can be entered
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return "Entrez l'état de votre glycémie";
+                  return 'rentrez les informations';
                 }
                 return null;
               },

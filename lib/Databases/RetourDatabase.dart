@@ -27,7 +27,7 @@ class RetourSQLiteDbProvider {
         path,
         version: 1,
         onCreate: (Database db, int version) async {
-          await db.execute("CREATE TABLE Retour(idRetour INTEGER PRIMARY KEY, idOneActivity INTEGER, stateGly TEXT, commentary TEXT)");
+          await db.execute("CREATE TABLE Retour(idRetour INTEGER PRIMARY KEY, idOneActivity INTEGER, stateGly INTEGER, commentary TEXT)");
         });
   }
 
