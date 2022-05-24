@@ -107,7 +107,7 @@ class StartingFormState extends State<StartingForm> {
                 return null;
               },
             ),
-            Text("Dans combien d'heures commencez vous votre activité physique ?"),
+            /*Text("Dans combien d'heures commencez vous votre activité physique ?"),
             TextFormField(
               controller: beforeActController,
               onSaved: (value){aiming=value as int;},
@@ -138,7 +138,7 @@ class StartingFormState extends State<StartingForm> {
                 }
                 return null;
               },
-            ),
+            ),*/
             ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {

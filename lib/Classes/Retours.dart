@@ -1,7 +1,7 @@
 class Retour {
   final int idRetour;
   final int idOneActivity;
-  final String stateGly;
+  final int stateGly;
   final String commentary;
   static final columns = ['idRetour', 'idOneActivity', 'stateGly', "commentary"];
 

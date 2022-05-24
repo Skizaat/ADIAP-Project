@@ -26,7 +26,7 @@ class SQLiteDbProvider {
       path,
     version: 1,
     onCreate: (Database db, int version) async {
-        await db.execute("CREATE TABLE Activities(idActivity INTEGER PRIMARY KEY, nameActivity TEXT, intensity TEXT, day TEXT, hour INTEGER)");
+        await db.execute("CREATE TABLE Activities(idActivity INTEGER PRIMARY KEY, nameActivity TEXT, intensity TEXT, day TEXT, hour INTEGER, offset_time INTEGER, offset_pourc INTEGER)");
     });
   }
 
@@ -49,9 +49,9 @@ class SQLiteDbProvider {
       print("après insert");
       var maxIdResult = await db?.rawQuery("SELECT MAX(idActivity)+1 as last_inserted_id FROM Activities");
       var id = maxIdResult?.first["last_inserted_id"];
-      var result = await db?.rawInsert("INSERT Into Activities (idActivity, nameActivity, intensity, day, hour)"
-          " VALUES (?, ?, ?, ?, ?)",
-          [id, activity.nameActivity, activity.intensity, activity.day, activity.hour],
+      var result = await db?.rawInsert("INSERT Into Activities (idActivity, nameActivity, intensity, day, hour, offset_time, offset_pourc)"
+          " VALUES (?, ?, ?, ?, ?, ?, ?)",
+          [id, activity.nameActivity, activity.intensity, activity.day, activity.hour, activity.offset_time, activity.offset_pourc],
       );
       print("that's ok");
       return result;

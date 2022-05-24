@@ -106,7 +106,7 @@ class RetourFormState extends State<RetourForm> {
             ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    Retour newRetour = Retour(idRetour: 1, idOneActivity: oneActivity.idOne, stateGly: stateController.text, commentary: commentaryController.text);
+                    Retour newRetour = Retour(idRetour: 1, idOneActivity: oneActivity.idOne, stateGly: int.parse(stateController.text), commentary: commentaryController.text);
                     await RetourSQLiteDbProvider.db.insert(newRetour);
                     Navigator.push(context, MaterialPageRoute(builder: (context) => SeanceRoute(oneActivity: oneActivity)));
                   }

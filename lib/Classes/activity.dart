@@ -9,7 +9,9 @@ class Activity {
   final String intensity;
   final String day;
   final int hour;
-  static final columns = ["idActivity", "nameActivity", "intensity", "day", "hour"];
+  final int offset_time;
+  final int offset_pourc;
+  static final columns = ["idActivity", "nameActivity", "intensity", "day", "hour", "offset_time", "offset_pourc"];
 
   const Activity ({
     required this.idActivity,
@@ -17,11 +19,13 @@ class Activity {
     required this.intensity,
     required this.day,
     required this.hour,
+    required this.offset_time,
+    required this.offset_pourc
   });
 
   factory Activity.fromMap(Map<dynamic, dynamic> data) {
     return Activity(
-      idActivity: data["idActivity"], nameActivity: data['nameActivity'], intensity: data['intensity'], day: data['day'], hour: data['hour'],
+      idActivity: data["idActivity"], nameActivity: data['nameActivity'], intensity: data['intensity'], day: data['day'], hour: data['hour'], offset_time: data['offset_time'], offset_pourc: data["offset_pourc"]
     );
   }
 
@@ -32,12 +36,14 @@ class Activity {
       'intensity' : intensity,
       'day' : day,
       'hour' : hour,
+      'offset_time' : offset_time,
+      'offset_pourc' : offset_pourc,
     };
   }
 
   @override
   String toString() {
-    return 'Activity{idActivity: $idActivity, nameActivity: $nameActivity, intensity: $intensity, day: $day, hour: $hour}';
+    return 'Activity{idActivity: $idActivity, nameActivity: $nameActivity, intensity: $intensity, day: $day, hour: $hour, offset_time: $offset_time, offset_pourc: $offset_pourc}';
   }
 
   String getNameActivity() {
@@ -54,6 +60,14 @@ class Activity {
 
   int getId() {
     return idActivity;
+  }
+
+  int getoffsettime()  {
+    return offset_time;
+  }
+
+  int getoffsettpourc() {
+    return offset_pourc;
   }
 }
 

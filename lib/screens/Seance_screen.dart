@@ -110,7 +110,7 @@ class SeanceScaffold extends StatelessWidget {
                                 body: Text(
                                     "Voici les retours que vous avez fait: \n\n" +
                                         "Etat de la Glycémie après la séance: " +
-                                        retour[0].stateGly + " mg/dL""\n\n" +
+                                        retour[0].stateGly.toString() + " mg/dL""\n\n" +
                                         "Commentaire personnel: " +
                                         retour[0].commentary),
                               );

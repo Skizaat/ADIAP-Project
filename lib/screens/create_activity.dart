@@ -155,7 +155,9 @@ class CreateFormState extends State<CreateForm> {
                 nameActivity: activiteController.text,
                 intensity: actIntensite,
                 day: weekday,
-                hour: int.parse(timeController.text),);
+                hour: int.parse(timeController.text),
+                offset_time: 0,
+                offset_pourc: 0);
               await SQLiteDbProvider.db.insert(newActivity);
               Navigator.push(context, MaterialPageRoute(
                   builder: (context) => OneActivityRoute(currentActivity: newActivity,)));
