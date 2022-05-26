@@ -9,11 +9,11 @@ class Activity {
   final String intensity;
   final String day;
   final int hour;
-  final int offset_time;
-  final int offset_pourc;
+  int offset_time;
+  int offset_pourc;
   static final columns = ["idActivity", "nameActivity", "intensity", "day", "hour", "offset_time", "offset_pourc"];
 
-  const Activity ({
+  Activity ({
     required this.idActivity,
     required this.nameActivity,
     required this.intensity,

@@ -16,7 +16,8 @@ import '../Databases/RetourDatabase.dart';
 
 class SeanceScaffold extends StatelessWidget {
   final OneActivity oneActivity;
-  const SeanceScaffold({Key, key, required this.oneActivity});
+  final Activity activity;
+  const SeanceScaffold({Key, key, required this.oneActivity, required this.activity});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,7 @@ class SeanceScaffold extends StatelessWidget {
                 direction: Axis.vertical,
                 children: [
                   Text("Glycémie visée: " + oneActivity.aimglycemie.toString() + " mg/dL\n"),
-                  Text("Glycémie " + oneActivity.timebefore.toString() + " h avant le début de l'activité: " + oneActivity.actglycemie.toString() + "mg/dL\n\n"),
+                  //Text("Glycémie " + oneActivity.timebefore.toString() + " h avant le début de l'activité: " + oneActivity.actglycemie.toString() + "mg/dL\n\n"),
                   Container(
                     height: 300,
                     alignment: Alignment.bottomLeft,
@@ -99,7 +100,7 @@ class SeanceScaffold extends StatelessWidget {
                                       ElevatedButton(
                                         child: const Text("Faire un retour"),
                                         onPressed: () {
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => RetourRoute(oneActivity: oneActivity)));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => RetourRoute(oneActivity: oneActivity, activity: activity,)));
                                         },
                                       ),
                                     ],

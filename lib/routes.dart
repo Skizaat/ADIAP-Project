@@ -130,23 +130,25 @@ class PropositionRoute extends StatelessWidget {
 
 class SeanceRoute extends StatelessWidget {
   final OneActivity oneActivity;
+  final Activity activity;
 
-  const SeanceRoute({Key, key, required this.oneActivity}) : super(key: key);
+  const SeanceRoute({Key, key, required this.oneActivity, required this.activity}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SeanceScaffold(oneActivity: oneActivity);
+    return SeanceScaffold(oneActivity: oneActivity, activity: activity,);
   }
 }
 
 class RetourRoute extends StatelessWidget {
   final OneActivity oneActivity;
+  final Activity activity;
 
-  const RetourRoute({Key, key, required this.oneActivity}) : super(key: key);
+  const RetourRoute({Key, key, required this.oneActivity, required this.activity}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return RetourScaffold(oneActivity: oneActivity);
+    return RetourScaffold(oneActivity: oneActivity, activity: activity,);
   }
 }
 

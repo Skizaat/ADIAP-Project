@@ -64,7 +64,7 @@ class HistoricActivityScaffold extends StatelessWidget {
                           child: GestureDetector(
                             onTap: () {
                               Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => SeanceRoute(oneActivity: data[index])));
+                                  builder: (context) => SeanceRoute(oneActivity: data[index], activity: concernedActivity,)));
                             },
                             child: Container(
                               alignment: Alignment.center,

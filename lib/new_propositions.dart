@@ -28,6 +28,10 @@ String Newgiveproposition(User user, OneActivity oneActivity, Activity activity)
 }
 
 String propositionPompe(int offset_time, int offset_pourcentage) {
+  print("time dans proposition");
+  print(offset_time);
+  print("pourc dans proposition");
+  print(offset_pourcentage);
   int pourcentage = 50 + offset_pourcentage;
   int time = 60 + offset_time;
   String proposition = 'ADIAP vous propose de réduire votre débit de base de ';
@@ -36,18 +40,16 @@ String propositionPompe(int offset_time, int offset_pourcentage) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+void adaptation(int before, int after, Activity activity) {
+  if (before - after > 15 ) {
+    activity.offset_pourc += 10;
+    activity.offset_time += -15;
+  }
+  if (after - before > 15) {
+    activity.offset_pourc += -10;
+    activity.offset_time += 15;
+  }
+}
 
 
 String NewPropositionResucrage(int aiming, int actual, int weight) {

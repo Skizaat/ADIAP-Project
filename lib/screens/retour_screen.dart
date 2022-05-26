@@ -13,14 +13,16 @@ import 'package:adiap/create_perso.dart';
 import 'package:adiap/Databases/OneActivityDatabase.dart';
 import 'package:adiap/Classes/OneActivity.dart';
 import 'package:intl/intl.dart';
+import 'package:adiap/new_propositions.dart';
 
 import '../Databases/RetourDatabase.dart';
 
 
 class RetourScaffold extends StatelessWidget {
   final OneActivity oneActivity;
+  final Activity activity;
 
-  const RetourScaffold({Key, key, required this.oneActivity,}) : super(key: key);
+  const RetourScaffold({Key, key, required this.oneActivity, required this.activity}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class RetourScaffold extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Text("Veuillez renseigner les informations suivantes\n", style: TextStyle(fontSize: 19),),
             ),
-            RetourForm(oneActivity: oneActivity),
+            RetourForm(oneActivity: oneActivity, activity: activity),
           ]
       ),
     );
@@ -48,17 +50,20 @@ class RetourScaffold extends StatelessWidget {
 
 class RetourForm extends StatefulWidget {
   final OneActivity oneActivity;
-  const RetourForm({Key? key, required this.oneActivity}) : super(key: key);
+  final Activity activity;
+
+  const RetourForm({Key? key, required this.oneActivity, required this.activity}) : super(key: key);
 
   @override
   RetourFormState createState() {
-    return RetourFormState(oneActivity: oneActivity);
+    return RetourFormState(oneActivity: oneActivity, activity: activity);
   }
 }
 
 class RetourFormState extends State<RetourForm> {
   final OneActivity oneActivity;
-  RetourFormState({Key? key, required this.oneActivity});
+  final Activity activity;
+  RetourFormState({Key? key, required this.oneActivity, required this.activity});
 
   final _formKey = GlobalKey<FormState>();
   TextEditingController stateController = TextEditingController();
@@ -106,9 +111,15 @@ class RetourFormState extends State<RetourForm> {
             ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
+                    adaptation(oneActivity.actglycemie, int.parse(stateController.text), activity);
+                    print("offsetpourcentage");
+                    print(activity.offset_pourc);
+                    print("\noffsettime");
+                    print(activity.offset_time);
                     Retour newRetour = Retour(idRetour: 1, idOneActivity: oneActivity.idOne, stateGly: int.parse(stateController.text), commentary: commentaryController.text);
                     await RetourSQLiteDbProvider.db.insert(newRetour);
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => SeanceRoute(oneActivity: oneActivity)));
+                    await SQLiteDbProvider.db.update(activity);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SeanceRoute(oneActivity: oneActivity, activity: activity,)));
                   }
                 },
                 child: Text('Enregistrer mon retour"')

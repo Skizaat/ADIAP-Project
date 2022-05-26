@@ -145,8 +145,8 @@ class StartingFormState extends State<StartingForm> {
                     OneActivity NewOne = OneActivity(idOne: 1,
                         aimglycemie: int.parse(aimController.text),
                         actglycemie: int.parse(glycemieController.text),
-                        timebefore: int.parse(beforeActController.text),
-                        timemeal: int.parse(mealController.text),
+                        timebefore: 0,
+                        timemeal: 0,
                         idAssociatedActivity: startingActivity.idActivity,
                         date: DateFormat("yyyy-MM-dd").format(DateTime.now()));
                     await OneSQLiteDbProvider.db.insert(NewOne);

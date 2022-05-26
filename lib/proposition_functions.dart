@@ -3,7 +3,7 @@ import 'package:adiap/Classes/User.dart';
 import 'package:flutter/material.dart';
 import 'Classes/activity.dart';
 
-String giveproposition(User user, OneActivity oneActivity, Activity activity) {
+/*String giveproposition(User user, OneActivity oneActivity, Activity activity) {
   String proposition = "";
   print("Gonna start thinking about a proposition");
 
@@ -46,7 +46,7 @@ String giveproposition(User user, OneActivity oneActivity, Activity activity) {
   proposition += "\nSi votre activité physique dure plus d'une heure, pensez à prendre une collation de 15 à 20 g de glucides par heure\n";
   print("finishthinking");
   return proposition;
-}
+}*/
 
 String pompeLoinRepas(String intensity) {
   print("je suis dans la fonction pompe loin repas");
