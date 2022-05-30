@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:adiap/routes.dart';
 import 'package:adiap/create_perso.dart';
 import 'package:adiap/Databases/file_handler.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class WelcomeScaffold extends StatelessWidget {
   const WelcomeScaffold({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {

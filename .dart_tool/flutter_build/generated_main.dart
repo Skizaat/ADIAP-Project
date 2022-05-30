@@ -5,10 +5,10 @@
 
 // @dart = 2.16
 
-// When `package:adiap/main.dart` defines `main`, that definition is shadowed by the definition below.
-export 'package:adiap/main.dart';
+// When `package:adiap/screens/notif.dart` defines `main`, that definition is shadowed by the definition below.
+export 'package:adiap/screens/notif.dart';
 
-import 'package:adiap/main.dart' as entrypoint;
+import 'package:adiap/screens/notif.dart' as entrypoint;
 import 'dart:io'; // flutter_ignore: dart_io_import.
 import 'package:path_provider_android/path_provider_android.dart';
 import 'package:shared_preferences_android/shared_preferences_android.dart';
