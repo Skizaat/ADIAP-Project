@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 //import 'notif.dart';
 import 'package:adiap/Databases/ActivityDatabase.dart';
+import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 import '../theme/custom_theme.dart';
@@ -44,7 +45,7 @@ class CreateForm extends StatefulWidget {
 class CreateFormState extends State<CreateForm> {
   CreateFormState({Key? key});
 
-  /*void createNotif(int hour, String day){
+  void createNotif(int hour, String day){
     FlutterLocalNotificationsPlugin fltrExtNotification;
     var androidInitilize = new AndroidInitializationSettings('app_icon');
     var iOSinitilize = new IOSInitializationSettings();
@@ -53,8 +54,17 @@ class CreateFormState extends State<CreateForm> {
     fltrExtNotification = new FlutterLocalNotificationsPlugin();
     fltrExtNotification.initialize(initilizationsSettings,
         onSelectNotification: notificationSelected);
-
+    tz.initializeTimeZones();
+    tz.setLocalLocation(tz.local);
+    //tz.TZDateTime schedTime = _setupDayTime();
+    var androidDetails = AndroidNotificationDetails("Channel ID", "Desi programmer", importance: Importance.max);
+    var iSODetails = new IOSNotificationDetails();
+    var generalNotificationDetails = new NotificationDetails(android: androidDetails, iOS: iSODetails);
+    //var scheduledTime = tz.TZDateTime.from(DateTime.now().add(const Duration(seconds : 10)), tz.local);
+    fltrExtNotification.zonedSchedule(1, "Votre séance de sport est bientot", "ADIAP : adaptez insuline", setupDayTime(hour, day), generalNotificationDetails, androidAllowWhileIdle: true, uiLocalNotificationDateInterpretation:
+    UILocalNotificationDateInterpretation.absoluteTime,matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime);
   }
+
   void notificationSelected(String? payload) async {
     showDialog(
       context: context,
@@ -67,13 +77,13 @@ class CreateFormState extends State<CreateForm> {
   tz.TZDateTime setupDayTime(int hour, String day) {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
     tz.TZDateTime scheduledDate =
-    tz.TZDateTime(tz.local, now.year, now.month, now.day, hour-2, 9); //il faut retirer 2h à l'heure actuelle
+    tz.TZDateTime(tz.local, now.year, now.month, now.day, hour-2, 22); //il faut retirer 2h à l'heure actuelle
     print("it is " + now.year.toString() + " " + now.month.toString() + " " + now.day.toString() + " " + now.hour.toString() + " (set time : 14) ");
     if (scheduledDate.isBefore(now)) {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
     return scheduledDate;
-  }*/
+  }
 
 
 
@@ -192,7 +202,7 @@ class CreateFormState extends State<CreateForm> {
                 intensity: actIntensite,
                 day: weekday,
                 hour: int.parse(timeController.text),);
-                //createNotif(int.parse(timeController.text), weekday);
+                createNotif(int.parse(timeController.text), weekday);
               await SQLiteDbProvider.db.insert(newActivity);
               Navigator.push(context, MaterialPageRoute(
                   builder: (context) => OneActivityRoute(currentActivity: newActivity,)));
