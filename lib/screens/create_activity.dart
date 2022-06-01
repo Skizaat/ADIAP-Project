@@ -4,8 +4,10 @@ import 'package:adiap/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:adiap/Classes/activity.dart';
 import 'package:flutter/services.dart';
-
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+//import 'notif.dart';
 import 'package:adiap/Databases/ActivityDatabase.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 import '../theme/custom_theme.dart';
 
@@ -41,6 +43,40 @@ class CreateForm extends StatefulWidget {
 
 class CreateFormState extends State<CreateForm> {
   CreateFormState({Key? key});
+
+  /*void createNotif(int hour, String day){
+    FlutterLocalNotificationsPlugin fltrExtNotification;
+    var androidInitilize = new AndroidInitializationSettings('app_icon');
+    var iOSinitilize = new IOSInitializationSettings();
+    var initilizationsSettings =
+    new InitializationSettings(android: androidInitilize, iOS: iOSinitilize);
+    fltrExtNotification = new FlutterLocalNotificationsPlugin();
+    fltrExtNotification.initialize(initilizationsSettings,
+        onSelectNotification: notificationSelected);
+
+  }
+  void notificationSelected(String? payload) async {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Text("Notification : $payload"),
+      ),
+    );
+  }
+
+  tz.TZDateTime setupDayTime(int hour, String day) {
+    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+    tz.TZDateTime scheduledDate =
+    tz.TZDateTime(tz.local, now.year, now.month, now.day, hour-2, 9); //il faut retirer 2h à l'heure actuelle
+    print("it is " + now.year.toString() + " " + now.month.toString() + " " + now.day.toString() + " " + now.hour.toString() + " (set time : 14) ");
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+    return scheduledDate;
+  }*/
+
+
+
 
   final _formKey = GlobalKey<FormState>();
   TextEditingController activiteController = TextEditingController();
@@ -156,6 +192,7 @@ class CreateFormState extends State<CreateForm> {
                 intensity: actIntensite,
                 day: weekday,
                 hour: int.parse(timeController.text),);
+                //createNotif(int.parse(timeController.text), weekday);
               await SQLiteDbProvider.db.insert(newActivity);
               Navigator.push(context, MaterialPageRoute(
                   builder: (context) => OneActivityRoute(currentActivity: newActivity,)));
