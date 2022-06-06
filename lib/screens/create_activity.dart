@@ -107,11 +107,11 @@ class CreateFormState extends State<CreateForm> {
         break;
     }
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-    print("nous sommes le " + now.weekday.toString() + "eme jour de la semaine");
+    //print("nous sommes le " + now.weekday.toString() + "eme jour de la semaine");
     print("scheduled at : ");
     print(now.day+daynb-now.weekday);
     tz.TZDateTime scheduledDate =
-    tz.TZDateTime(tz.local, now.year, now.month, now.day+daynb-now.weekday, hour-2-1, 22); //il faut retirer 2h à l'heure actuelle onn prévient une heure avant
+    tz.TZDateTime(tz.local, now.year, now.month, now.day+daynb-now.weekday, hour-2-2, 30); //il faut retirer 2h à l'heure actuelle onn prévient une heure et demie avant
 
     print("it is " + now.year.toString() + " " + now.month.toString() + " " + now.day.toString() + " " + now.hour.toString() + " (set time : 14) ");
     return scheduledDate;
