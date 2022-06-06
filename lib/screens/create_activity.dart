@@ -61,7 +61,7 @@ class CreateFormState extends State<CreateForm> {
     var iSODetails = new IOSNotificationDetails();
     var generalNotificationDetails = new NotificationDetails(android: androidDetails, iOS: iSODetails);
     //var scheduledTime = tz.TZDateTime.from(DateTime.now().add(const Duration(seconds : 10)), tz.local);
-    fltrExtNotification.zonedSchedule(1, "Votre séance de sport est bientot", "ADIAP : adaptez insuline", setupDayTime(hour, day), generalNotificationDetails, androidAllowWhileIdle: true, uiLocalNotificationDateInterpretation:
+    fltrExtNotification.zonedSchedule(1, "Votre séance de sport est dans une heure!", "ADIAP : adaptez insuline", setupDayTime(hour, day), generalNotificationDetails, androidAllowWhileIdle: true, uiLocalNotificationDateInterpretation:
     UILocalNotificationDateInterpretation.absoluteTime,matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime);
   }
 
@@ -75,13 +75,45 @@ class CreateFormState extends State<CreateForm> {
   }
 
   tz.TZDateTime setupDayTime(int hour, String day) {
-    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-    tz.TZDateTime scheduledDate =
-    tz.TZDateTime(tz.local, now.year, now.month, now.day, hour-2, 22); //il faut retirer 2h à l'heure actuelle
-    print("it is " + now.year.toString() + " " + now.month.toString() + " " + now.day.toString() + " " + now.hour.toString() + " (set time : 14) ");
-    if (scheduledDate.isBefore(now)) {
-      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    int daynb=0;
+    switch(day){
+      case "Lundi":
+        daynb=1;
+        break;
+      case "Mardi":
+        daynb=2;
+        break;
+
+      case "Mercredi":
+        daynb=3;
+        break;
+
+      case "Jeudi":
+        daynb=4;
+        break;
+
+      case "Vendredi":
+        daynb=5;
+        break;
+      case "Samedi":
+        daynb=6;
+        break;
+
+      case "Dimanche":
+        daynb=7;
+        break;
+      default:
+        daynb=1;
+        break;
     }
+    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+    print("nous sommes le " + now.weekday.toString() + "eme jour de la semaine");
+    print("scheduled at : ");
+    print(now.day+daynb-now.weekday);
+    tz.TZDateTime scheduledDate =
+    tz.TZDateTime(tz.local, now.year, now.month, now.day+daynb-now.weekday, hour-2-1, 22); //il faut retirer 2h à l'heure actuelle onn prévient une heure avant
+
+    print("it is " + now.year.toString() + " " + now.month.toString() + " " + now.day.toString() + " " + now.hour.toString() + " (set time : 14) ");
     return scheduledDate;
   }
 
