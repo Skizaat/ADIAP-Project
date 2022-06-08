@@ -4,8 +4,11 @@ import 'package:adiap/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:adiap/Classes/activity.dart';
 import 'package:flutter/services.dart';
-
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+//import 'notif.dart';
 import 'package:adiap/Databases/ActivityDatabase.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 import '../theme/custom_theme.dart';
 
@@ -41,6 +44,83 @@ class CreateForm extends StatefulWidget {
 
 class CreateFormState extends State<CreateForm> {
   CreateFormState({Key? key});
+
+  void createNotif(int hour, String day, String texte1, String texte2, int id){
+    FlutterLocalNotificationsPlugin fltrExtNotification;
+    var androidInitilize = new AndroidInitializationSettings('app_icon');
+    var iOSinitilize = new IOSInitializationSettings();
+    var initilizationsSettings =
+    new InitializationSettings(android: androidInitilize, iOS: iOSinitilize);
+    fltrExtNotification = new FlutterLocalNotificationsPlugin();
+    fltrExtNotification.initialize(initilizationsSettings,
+        onSelectNotification: notificationSelected);
+    tz.initializeTimeZones();
+    tz.setLocalLocation(tz.local);
+    //tz.TZDateTime schedTime = _setupDayTime();
+    print(texte1 + "  " + texte2);
+    var androidDetails = AndroidNotificationDetails("Channel ID", "Desi programmer", importance: Importance.max);
+    var iSODetails = new IOSNotificationDetails();
+    var generalNotificationDetails = new NotificationDetails(android: androidDetails, iOS: iSODetails);
+    //var scheduledTime = tz.TZDateTime.from(DateTime.now().add(const Duration(seconds : 10)), tz.local);
+    fltrExtNotification.zonedSchedule(1, texte1, texte2, setupDayTime(hour, day,id), generalNotificationDetails, androidAllowWhileIdle: true, uiLocalNotificationDateInterpretation:
+    UILocalNotificationDateInterpretation.absoluteTime,matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime);
+  }
+
+  void notificationSelected(String? payload) async {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Text("Notification : $payload"),
+      ),
+    );
+  }
+
+  tz.TZDateTime setupDayTime(int hour, String day, int id) {
+    int daynb=0;
+    switch(day){
+      case "Lundi":
+        daynb=1;
+        break;
+      case "Mardi":
+        daynb=2;
+        break;
+
+      case "Mercredi":
+        daynb=3;
+        break;
+
+      case "Jeudi":
+        daynb=4;
+        break;
+
+      case "Vendredi":
+        daynb=5;
+        break;
+      case "Samedi":
+        daynb=6;
+        break;
+
+      case "Dimanche":
+        daynb=7;
+        break;
+      default:
+        daynb=1;
+        break;
+    }
+    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+    //print("nous sommes le " + now.weekday.toString() + "eme jour de la semaine");
+    print("scheduled at : ");
+    print(now.day+daynb-now.weekday);
+    print(hour-id);
+    tz.TZDateTime scheduledDate =
+    tz.TZDateTime(tz.local, now.year, now.month, now.day+daynb-now.weekday, hour-2-id, 0); //il faut retirer 2h à l'heure actuelle onn prévient une heure et demie avant
+
+    //print("it is " + now.year.toString() + " " + now.month.toString() + " " + now.day.toString() + " " + now.hour.toString() + " (set time : 14) ");
+    return scheduledDate;
+  }
+
+
+
 
   final _formKey = GlobalKey<FormState>();
   TextEditingController activiteController = TextEditingController();
@@ -158,6 +238,8 @@ class CreateFormState extends State<CreateForm> {
                 hour: int.parse(timeController.text),
                 offset_time: 0,
                 offset_pourc: 0);
+                createNotif(int.parse(timeController.text), weekday, "Votre séance de sport est dans une heure!", "ADIAP : adaptez insuline",1);
+                createNotif(int.parse(timeController.text), weekday, "Faites un retour sur votre séance", "Comment s'est passé votre sport",-1);
               await SQLiteDbProvider.db.insert(newActivity);
               Navigator.push(context, MaterialPageRoute(
                   builder: (context) => OneActivityRoute(currentActivity: newActivity,)));
