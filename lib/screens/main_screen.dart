@@ -14,7 +14,7 @@ class MainScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Nom Profil'),
+          title: const Text('ADIAP'),
           leading: IconButton( //Custom leading icon, such as back icon or other icon
               onPressed: () {
                 if(_drawerscaffoldkey.currentState!.isDrawerOpen) {
@@ -45,7 +45,7 @@ class MainScaffold extends StatelessWidget {
                       child: Row(
                           children: const [
                             Icon(Icons.account_circle),
-                            Text("Mon Profil")
+                            Text("Mon Profil\n")
                           ],
                       ),
                     ),
@@ -57,7 +57,7 @@ class MainScaffold extends StatelessWidget {
                       child: Row(
                         children: const [
                           Icon(Icons.emoji_events),
-                          Text("Mes Activités")
+                          Text("Mes Activités\n")
                         ],
                       ),
                     ),
@@ -69,7 +69,7 @@ class MainScaffold extends StatelessWidget {
                       child: Row(
                         children: const [
                           Icon(Icons.info),
-                          Text("En savoir plus"),
+                          Text("En savoir plus\n"),
                         ],
                       ),
                     ),
@@ -81,7 +81,7 @@ class MainScaffold extends StatelessWidget {
                       child: Row(
                         children: const [
                           Icon(Icons.settings),
-                          Text("Paramètres"),
+                          Text("Paramètres\n"),
                         ],
                       ),
                     ),
