@@ -16,6 +16,11 @@ import 'package:adiap/screens/profile_screen.dart';
 import 'package:adiap/screens/start_activity_screen.dart';
 import 'package:adiap/screens/activity_historic_screen.dart';
 import 'package:adiap/create_perso.dart';
+import 'package:adiap/screens/En savoir plus/Act_physique_intensite.dart';
+import 'package:adiap/screens/En savoir plus/Act_physique_diabete.dart';
+import 'package:adiap/screens/En savoir plus/Obj_Gly.dart';
+import 'package:adiap/screens/En savoir plus/Collation_resucrage.dart';
+import 'package:adiap/screens/En savoir plus/Adapation_insuline.dart';
 
 import 'Classes/activity.dart';
 
@@ -158,5 +163,50 @@ class CreateActivityRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CreateActivityScaffold();
+  }
+}
+
+class Act_Phy_Int_Route extends StatelessWidget {
+  const Act_Phy_Int_Route({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Act_Phy_Int_Scaffold();
+  }
+}
+
+class Act_Phy_Diab_Route extends StatelessWidget {
+  const Act_Phy_Diab_Route({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Act_Phy_Diab_Scaffold();
+  }
+}
+
+class Obj_Gly_Route extends StatelessWidget {
+  const Obj_Gly_Route({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Obj_Gly_Scaffold();
+  }
+}
+
+class Col_res_Route extends StatelessWidget {
+  const Col_res_Route({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Col_res_Scaffold();
+  }
+}
+
+class Adat_insu_Route extends StatelessWidget {
+  const Adat_insu_Route({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Adat_insu_Scaffold();
   }
 }

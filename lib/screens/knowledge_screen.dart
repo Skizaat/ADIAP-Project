@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:adiap/Databases/ActivityDatabase.dart';
+import 'package:adiap/routes.dart';
 
 class KnowledgeScaffold extends StatelessWidget {
   const KnowledgeScaffold({Key? key}) : super(key: key);
@@ -19,44 +19,57 @@ class KnowledgeScaffold extends StatelessWidget {
           child: Column(
             children: [
               GestureDetector(
-                onTap: () {},
-                child: Text('Activité physique et diabète'),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => Act_Phy_Diab_Route()));
+                },
+                child: Text('Activité physique et diabète\n'),
                 ),
               GestureDetector(
-                onTap: () {},
-                child: Text('Adaptations des doses d’insulines pour l’activité physique'),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => Adat_insu_Route()));
+                },
+                child: Text('Adaptations des doses d’insulines pour l’activité physique\n'),
               ),
               GestureDetector(
                 onTap: () {},
-                child: Text('Physiologie du corps à l’activité physique', style: TextStyle(fontStyle: FontStyle.italic)),
+                child: Text('Physiologie du corps à l’activité physique\n', style: TextStyle(fontStyle: FontStyle.italic)),
               ),
               GestureDetector(
                 onTap: () {},
-                child: Text('Alimentation et sport'),
+                child: Text('Alimentation et sport\n', style: TextStyle(fontStyle: FontStyle.italic)),
+              ),
+              GestureDetector(
+                onTap: () {Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => Col_res_Route()));},
+                child: Text('Collation préventive et resucrage durant une activité physique\n'),
               ),
               GestureDetector(
                 onTap: () {},
-                child: Text('Collation préventive et resucrage durant une activité physique'),
+                child: Text('Activité physique et hypoglycémie\n', style: TextStyle(fontStyle: FontStyle.italic)),
               ),
               GestureDetector(
                 onTap: () {},
-                child: Text('Activité physique et hypoglycémie'),
+                child: Text('Activité physique et hyperglycémie\n', style: TextStyle(fontStyle: FontStyle.italic)),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => Obj_Gly_Route()));
+                },
+                child: Text('Objectif glycémique pour débuter une activité physique\n'),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => Act_Phy_Int_Route()));
+                },
+                child: Text('Activité physique et intensité : quesaco ?\n'),
               ),
               GestureDetector(
                 onTap: () {},
-                child: Text('Activité physique et hyperglycémie'),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Text('Objectif glycémique pour débuter une activité physique'),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Text('Activité physique et intensité : quesaco ?'),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Text('Surveillance glycémique lors de mon activité physique'),
+                child: Text('Surveillance glycémique lors de mon activité physique\n', style: TextStyle(fontStyle: FontStyle.italic)),
               ),
             ],
           ),
