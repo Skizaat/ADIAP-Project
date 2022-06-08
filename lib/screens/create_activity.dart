@@ -45,7 +45,7 @@ class CreateForm extends StatefulWidget {
 class CreateFormState extends State<CreateForm> {
   CreateFormState({Key? key});
 
-  void createNotif(int hour, String day){
+  void createNotif(int hour, String day, String texte1, String texte2, int id){
     FlutterLocalNotificationsPlugin fltrExtNotification;
     var androidInitilize = new AndroidInitializationSettings('app_icon');
     var iOSinitilize = new IOSInitializationSettings();
@@ -57,11 +57,12 @@ class CreateFormState extends State<CreateForm> {
     tz.initializeTimeZones();
     tz.setLocalLocation(tz.local);
     //tz.TZDateTime schedTime = _setupDayTime();
+    print(texte1 + "  " + texte2);
     var androidDetails = AndroidNotificationDetails("Channel ID", "Desi programmer", importance: Importance.max);
     var iSODetails = new IOSNotificationDetails();
     var generalNotificationDetails = new NotificationDetails(android: androidDetails, iOS: iSODetails);
     //var scheduledTime = tz.TZDateTime.from(DateTime.now().add(const Duration(seconds : 10)), tz.local);
-    fltrExtNotification.zonedSchedule(1, "Votre séance de sport est dans une heure!", "ADIAP : adaptez insuline", setupDayTime(hour, day), generalNotificationDetails, androidAllowWhileIdle: true, uiLocalNotificationDateInterpretation:
+    fltrExtNotification.zonedSchedule(1, texte1, texte2, setupDayTime(hour, day,id), generalNotificationDetails, androidAllowWhileIdle: true, uiLocalNotificationDateInterpretation:
     UILocalNotificationDateInterpretation.absoluteTime,matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime);
   }
 
@@ -74,7 +75,7 @@ class CreateFormState extends State<CreateForm> {
     );
   }
 
-  tz.TZDateTime setupDayTime(int hour, String day) {
+  tz.TZDateTime setupDayTime(int hour, String day, int id) {
     int daynb=0;
     switch(day){
       case "Lundi":
@@ -110,10 +111,11 @@ class CreateFormState extends State<CreateForm> {
     //print("nous sommes le " + now.weekday.toString() + "eme jour de la semaine");
     print("scheduled at : ");
     print(now.day+daynb-now.weekday);
+    print(hour-id);
     tz.TZDateTime scheduledDate =
-    tz.TZDateTime(tz.local, now.year, now.month, now.day+daynb-now.weekday, hour-2-2, 30); //il faut retirer 2h à l'heure actuelle onn prévient une heure et demie avant
+    tz.TZDateTime(tz.local, now.year, now.month, now.day+daynb-now.weekday, hour-2-id, 0); //il faut retirer 2h à l'heure actuelle onn prévient une heure et demie avant
 
-    print("it is " + now.year.toString() + " " + now.month.toString() + " " + now.day.toString() + " " + now.hour.toString() + " (set time : 14) ");
+    //print("it is " + now.year.toString() + " " + now.month.toString() + " " + now.day.toString() + " " + now.hour.toString() + " (set time : 14) ");
     return scheduledDate;
   }
 
@@ -234,7 +236,8 @@ class CreateFormState extends State<CreateForm> {
                 intensity: actIntensite,
                 day: weekday,
                 hour: int.parse(timeController.text),);
-                createNotif(int.parse(timeController.text), weekday);
+                createNotif(int.parse(timeController.text), weekday, "Votre séance de sport est dans une heure!", "ADIAP : adaptez insuline",1);
+                createNotif(int.parse(timeController.text), weekday, "Faites un retour sur votre séance", "Comment s'est passé votre sport",-1);
               await SQLiteDbProvider.db.insert(newActivity);
               Navigator.push(context, MaterialPageRoute(
                   builder: (context) => OneActivityRoute(currentActivity: newActivity,)));
