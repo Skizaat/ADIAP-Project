@@ -73,9 +73,7 @@ class SeanceScaffold extends StatelessWidget {
                         future: PropSQLiteDbProvider.db.getById(oneActivity.idOne),
                     ),
                   ),
-                  Container(
-                    height: 300,
-                    alignment: Alignment.bottomLeft,
+                  SingleChildScrollView(
                     child: FutureBuilder(
                       builder: (ctx, snapshot) {
                         if (snapshot.connectionState ==
@@ -107,8 +105,8 @@ class SeanceScaffold extends StatelessWidget {
                                   )
                               );
                             } else {
-                              return Scaffold(
-                                body: Text(
+                              return SingleChildScrollView(
+                                child: Text(
                                     "Voici les retours que vous avez fait: \n\n" +
                                         "Etat de la Glycémie après la séance: " +
                                         retour[0].stateGly.toString() + " mg/dL""\n\n" +
